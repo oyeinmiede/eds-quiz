@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="240" height="64" viewBox="0 0 240 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ENT321 logo">
-  <rect rx="10" ry="10" width="240" height="64" fill="#0b74de"/>
-  <text x="20" y="40" font-family="Segoe UI, Roboto, Arial" font-size="28" fill="#fff" font-weight="700">ENT321</text>
-  <text x="140" y="40" font-family="Segoe UI, Roboto, Arial" font-size="12" fill="#fff">30‑Minute Quiz</text>
+<svg width="480" height="128" viewBox="0 0 480 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">ENT321 Logo</title>
+  <desc id="desc">Blue rounded badge with a stylized lightbulb icon and bold ENT321 wordmark, with "30‑Minute Quiz" subtitle.</desc>
+
+  <!-- Background badge with subtle gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0b74de"/>
+      <stop offset="1" stop-color="#0a5fb8"/>
+    </linearGradient>
+
+    <linearGradient id="bulbGrad" x1="0" x2="1">
+      <stop offset="0" stop-color="#fff59a"/>
+      <stop offset="1" stop-color="#ffd54f"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#06243a" flood-opacity="0.18"/>
+    </filter>
+
+    <style>
+      .wordmark { font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight:700; fill:#ffffff; letter-spacing:0.6px; }
+      .subtitle { font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size:14px; fill:rgba(255,255,255,0.92); }
+    </style>
+  </defs>
+
+  <!-- Badge -->
+  <g filter="url(#softShadow)">
+    <rect x="4" y="4" rx="18" ry="18" width="472" height="120" fill="url(#bgGrad)"/>
+  </g>
+
+  <!-- Left icon area: stylized lightbulb inside circle -->
+  <g transform="translate(28,20)">
+    <circle cx="40" cy="40" r="40" fill="rgba(255,255,255,0.08)"/>
+    <!-- bulb body -->
+    <path d="M40 18c-9.94 0-18 8.06-18 18 0 6.6 3.6 12.36 8.9 15.6 1.2.72 1.8 2.16 1.44 3.48l-1.8 6.6c-.36 1.32.6 2.64 1.92 2.64h15.08c1.32 0 2.28-1.32 1.92-2.64l-1.8-6.6c-.36-1.32.24-2.76 1.44-3.48C54.4 48.36 58 42.6 58 36 58 26.06 49.94 18 40 18z"
+          fill="url(#bulbGrad)"/>
+    <!-- filament -->
+    <path d="M36 36c0-2.2 1.8-4 4-4s4 1.8 4 4c0 1.1-.45 2.1-1.17 2.83L42 44l-0.83-5.17C36.45 38.1 36 37.1 36 36z"
+          fill="#fff" opacity="0.9"/>
+    <!-- base -->
+    <rect x="30" y="66" width="20" height="6" rx="2" fill="#d1dbe8"/>
+    <rect x="34" y="72" width="12" height="6" rx="2" fill="#b8c6df"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(110,36)">
+    <text class="wordmark" x="0" y="36" font-size="40">ENT321</text>
+    <text class="subtitle" x="0" y="62">30‑Minute Quiz</text>
+  </g>
+
+  <!-- Accent spark (small) -->
+  <g transform="translate(380,18)" opacity="0.95">
+    <path d="M8 0 L12 10 L22 12 L12 16 L8 26 L6 16 L-4 12 L6 10 Z" fill="#fff" opacity="0.12" transform="scale(1.6) translate(-6,-6)"/>
+  </g>
 </svg>
