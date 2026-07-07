@@ -5,17 +5,15 @@
     --muted: #6b7280;
     --text: #111;
     --surface: #ffffff;
-    --muted-2: #9aa4b2;
 }
 
-:root[data-theme-dark="true"] {
+[data-theme="dark"] {
     --accent: #2aa0ff;
-    --bg: #0f1720;
+    --bg: #07101a;
     --card: #0b1220;
     --muted: #9fb4c8;
     --text: #e6eef8;
     --surface: #07101a;
-    --muted-2: #7f98ad;
 }
 
 * {
@@ -43,8 +41,22 @@ header {
     gap: 12px
 }
 
-.brand img {
-    display: block
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.logo {
+    width: 140px;
+    height: 36px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700
 }
 
 h1 {
@@ -83,10 +95,11 @@ h1 {
     margin: 10px 0;
     display: flex;
     align-items: center;
-    gap: 12px
+    gap: 12px;
+    flex-wrap: wrap
 }
 
-.form-row label {
+label {
     min-width: 160px;
     color: var(--muted)
 }
@@ -95,13 +108,9 @@ select,
 input[type="number"] {
     padding: 8px;
     border-radius: 8px;
-    border: 1px solid #e6eefc;
+    border: 1px solid rgba(11, 116, 222, 0.08);
     background: var(--surface);
     color: var(--text)
-}
-
-.note {
-    font-size: 13px
 }
 
 .question-area {
@@ -129,16 +138,18 @@ input[type="number"] {
     border-radius: 8px;
     padding: 12px;
     cursor: pointer;
-    border: 1px solid transparent
+    border: 1px solid transparent;
+    color: var(--text)
 }
 
-:root[data-theme-dark="true"] .opt {
+[data-theme="dark"] .opt {
     background: #071826
 }
 
 .opt.selected {
     border-color: var(--accent);
-    background: linear-gradient(180deg, #eaf5ff, #f3f9ff)
+    background: linear-gradient(180deg, #eaf5ff, #f3f9ff);
+    color: var(--accent)
 }
 
 .controls {
@@ -163,12 +174,6 @@ button.secondary {
     border: 1px solid rgba(11, 116, 222, 0.12)
 }
 
-button.small {
-    padding: 6px 8px;
-    font-size: 13px;
-    border-radius: 6px
-}
-
 .nav-grid {
     display: flex;
     flex-wrap: wrap;
@@ -188,21 +193,12 @@ button.small {
 
 .nav-btn.answered {
     background: #e6fff7;
-    border-color: #b6f0d8
+    border-color: #b6f0d8;
+    color: #0b7c4d
 }
 
 .result {
     margin-top: 18px
-}
-
-.correct {
-    color: green;
-    font-weight: 700
-}
-
-.wrong {
-    color: #d9534f;
-    font-weight: 700
 }
 
 footer {
@@ -210,6 +206,16 @@ footer {
     color: var(--muted);
     font-size: 13px;
     text-align: center
+}
+
+.small {
+    padding: 6px 8px;
+    font-size: 13px;
+    border-radius: 6px
+}
+
+.hidden {
+    display: none
 }
 
 .qprogress {
@@ -220,13 +226,11 @@ footer {
     width: 160px
 }
 
-.qprogress::after {
-    content: '';
+.qprogress>i {
     display: block;
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, var(--accent), #2aa0ff);
-    transition: width .3s
+    background: linear-gradient(90deg, var(--accent), #2aa0ff)
 }
 
 @media (max-width:600px) {
