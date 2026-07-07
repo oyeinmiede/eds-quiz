@@ -1,0 +1,1035 @@
+[
+  {
+    "q": "Innovation is the process of creating and implementing new ideas, products, services, or processes that add what?",
+    "opts": ["Bureaucracy", "Value", "Inventions", "Divisions"],
+    "a": 1
+  },
+  {
+    "q": "Innovation goes beyond mere invention because it strictly requires which two elements?",
+    "opts": [
+      "R&D and capital",
+      "Execution and adoption",
+      "Creativity and luck",
+      "Motivation and vision"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which of the following is an objective of understanding an innovative culture?",
+    "opts": [
+      "Increasing organizational bureaucracy",
+      "Learning key principles fostering innovation",
+      "Eliminating cross-functional teams",
+      "Driving short-term quarterly results"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What does psychological safety in an innovative culture prevent?",
+    "opts": [
+      "Cross-industry insights",
+      "Customer-centric mindsets",
+      "Fear of ridicule or punishment",
+      "Experimentation"
+    ],
+    "a": 2
+  },
+  {
+    "q": "A customer-centric mindset in innovation involves using which methodology?",
+    "opts": [
+      "Aggressive sales persuasion",
+      "Lean startup methodology",
+      "High price skimming",
+      "Traditional hierarchy workflows"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which barrier to innovation is described as a force that \"stifles creativity\"?",
+    "opts": ["Siloed teams", "Risk aversion", "Bureaucracy", "Prototyping"],
+    "a": 1
+  },
+  {
+    "q": "How does bureaucracy act as a barrier to innovation?",
+    "opts": [
+      "By creating cross-functional teams",
+      "By slowing down decision-making, which kills innovation",
+      "By over-rewarding failure",
+      "By flattening organizational hierarchies"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Overemphasis on quarterly results that discourages long-term R&D describes which barrier?",
+    "opts": [
+      "Short-term focus",
+      "Siloed teams",
+      "Bureaucracy",
+      "Risk aversion"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Which of the following is a recommended step to build an innovation culture?",
+    "opts": [
+      "Increase management layers",
+      "Flatten hierarchies to speed up decision-making",
+      "Penalize failed experiments",
+      "Reinforce strict boundaries between departments"
+    ],
+    "a": 1
+  },
+  {
+    "q": "To spark multi-industry creativity, what actionable step is advised?",
+    "opts": [
+      "Read internal reports only",
+      "Network outside your field",
+      "Isolate core teams",
+      "Avoid cross-functional engagement"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Complete the quote from the notes: \"Innovation is not about a single breakthrough but a culture that...\"",
+    "opts": [
+      "maximizes monthly sales volumes.",
+      "nurtures breakthroughs every day.",
+      "guarantees zero business failures.",
+      "eliminates all financial risks."
+    ],
+    "a": 1
+  },
+
+  {
+    "q": "Selling is defined as the process of what?",
+    "opts": [
+      "Conducting strategic consumer market research",
+      "Persuading a customer to purchase a specific product or service",
+      "Creating long-term brand equity",
+      "Altering societal habits through micro-financing"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which activity is specifically tied to the selling process?",
+    "opts": [
+      "Designing market research surveys",
+      "Handling objections and closing sales",
+      "Formulating the 4Ps strategic mix",
+      "Establishing public brand reputation"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the process of creating awareness, interest, and demand for a product or service?",
+    "opts": [
+      "Production planning",
+      "Marketing",
+      "Prototyping",
+      "Concept testing"
+    ],
+    "a": 1
+  },
+  {
+    "q": "According to the notes, selling focuses on converting leads into sales, while marketing focuses on what?",
+    "opts": [
+      "Pushing existing products to the market",
+      "Creating leads and building brand awareness",
+      "Optimizing internal production systems",
+      "Handling standard client objections"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which evolution of marketing focuses concurrently on profit, customer welfare, and society?",
+    "opts": [
+      "Digital Marketing",
+      "Relationship Marketing",
+      "Societal Marketing",
+      "Production Concept"
+    ],
+    "a": 2
+  },
+  {
+    "q": "The Selling Concept is a philosophy heavily focused on moving existing products through what?",
+    "opts": [
+      "Sensing and responding to customer desires",
+      "Aggressive promotion and persuasion",
+      "Custom sustainable ecosystems",
+      "Long-term relationship cultivation"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Under the Selling Concept, what is the core business view?",
+    "opts": [
+      "Sense and Respond",
+      "Make and Sell",
+      "Analyze and Adapt",
+      "Segment and Target"
+    ],
+    "a": 1
+  },
+  {
+    "q": "The Marketing Concept adopts which business view?",
+    "opts": [
+      "Make and Sell",
+      "Sense and Respond",
+      "Produce and Push",
+      "Distribute and Dictate"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What time frame defines the strategic perspective of the Marketing Concept?",
+    "opts": ["Short-term", "Long-term", "Seasonal", "Bi-weekly"],
+    "a": 1
+  },
+  {
+    "q": "What are the primary tools used within the comprehensive Marketing Concept?",
+    "opts": [
+      "Promotion, discounts, and persuasion alone",
+      "The 4Ps: Product, Price, Place, Promotion",
+      "Cold calling and quotas",
+      "Sourcing factory raw materials"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What represents a basic requirement for survival?",
+    "opts": [
+      "Personal tastes and preferences",
+      "Needs",
+      "Specific products backed by money",
+      "Premium loyalty benefits"
+    ],
+    "a": 1
+  },
+  {
+    "q": "When a basic survival requirement is directed toward personal preferences and tastes, it becomes a:",
+    "opts": ["Demand", "Need", "Want", "Transaction"],
+    "a": 2
+  },
+  {
+    "q": "A specific product that meets a consumer's want, backed by the ability to buy, is called:",
+    "opts": [
+      "A demand",
+      "A general desire",
+      "An exchange relationship",
+      "A lead"
+    ],
+    "a": 0
+  },
+  {
+    "q": "According to Peter Drucker, while selling aims to close deals, marketing aims to do what?",
+    "opts": [
+      "Maximize sales volume immediately",
+      "Build relationships, drive engagement, and ultimately drive sales",
+      "Provide product information only",
+      "Handle objections directly"
+    ],
+    "a": 1
+  },
+
+  {
+    "q": "What is product development defined as by Krishnan & Ulrich (2001)?",
+    "opts": [
+      "Execution of aggressive market clearance pricing",
+      "Transformation of a market opportunity into a product available for sale",
+      "Management of basic accounting registers",
+      "Elimination of external venture capital networks"
+    ],
+    "a": 1
+  },
+  {
+    "q": "How many distinct stages of product development are outlined in these lecture notes?",
+    "opts": ["Five (5)", "Seven (7)", "Ten (10)", "Three (3)"],
+    "a": 1
+  },
+  {
+    "q": "What is the very first stage in the product development lifecycle?",
+    "opts": [
+      "Testing and Validation",
+      "Production Planning",
+      "Idea Generation",
+      "Product Definition"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Brainstorming product concepts based on customer needs, competitor analysis, and R&D happens in which stage?",
+    "opts": [
+      "Evaluation",
+      "Idea Generation",
+      "Launch and Commercialization",
+      "Feasibility Analysis"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What does the \"S\" in the SCAMPER brainstorming technique stand for?",
+    "opts": ["Strategy", "Substitute", "Synergy", "Short-term"],
+    "a": 1
+  },
+  {
+    "q": "Transforming ideas into tangible concepts while assessing technical, financial, and market feasibility occurs in which stage?",
+    "opts": [
+      "Production Planning",
+      "Idea Generation",
+      "Concept Development and Feasibility Analysis (Product Definition)",
+      "Post-Launch Evaluation"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Which lean tool is mentioned as part of defining the product concept strategy?",
+    "opts": [
+      "Business model Canvas",
+      "Traditional 50-page ledger",
+      "Pay-Per-Click Ad Tracker",
+      "Hierarchy Flowchart"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Using CAD software and 3D modeling to construct prototypes happens during:",
+    "opts": [
+      "Idea Generation",
+      "Evaluation",
+      "Design and Prototyping",
+      "Commercialization"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Conducting internal testing, external testing, and checking regulatory compliance is part of:",
+    "opts": [
+      "Production Planning",
+      "Testing and Validation",
+      "Idea Generation",
+      "Market Sourcing"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which stage determines resource allocation, supplier selection, and manufacturing workflows?",
+    "opts": [
+      "Idea Generation",
+      "Concept Sourcing",
+      "Production Planning",
+      "Post-Launch Evaluation"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Launching and commercialization involves introducing the product into the market using what framework?",
+    "opts": [
+      "The SCAMPER model",
+      "Marketing Mix i.e 4Ps",
+      "The Triangular Environment Framework",
+      "Net Promoter Score ledger"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Monitoring sales, customer feedback, and tracking ROI using the Net Promoter Score (NPS) occurs in:",
+    "opts": [
+      "Production Planning",
+      "Post-Launch Evaluation",
+      "Feasibility Assessment",
+      "Design Phase"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which product is cited as reiterating the design process to balance cost, quality, and user experience?",
+    "opts": [
+      "Microsoft Windows",
+      "Apple product (iPhone)",
+      "Amazon Alexa",
+      "Google Glass"
+    ],
+    "a": 1
+  },
+
+  {
+    "q": "A business venture is essentially created to pursue what?",
+    "opts": [
+      "Total market monopoly",
+      "A specific opportunity or idea",
+      "Corporate bureaucracy",
+      "Government subsidies"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What are the three components of the Triangular Diverse Environments?",
+    "opts": [
+      "Human, Social, and Financial capital",
+      "Economic, Social / Cultural, and Technological environments",
+      "Advertising, Pricing, and Delivery channels",
+      "Sourcing, Production, and Evaluation steps"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Access to capital, labor market conditions, inflation, and consumer purchasing power belong to which environment?",
+    "opts": [
+      "Cultural Environment",
+      "Economic Environment",
+      "Technological Environment",
+      "Political Isolation"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Societal norms, values, and beliefs that affect consumer behavior belong to which environment?",
+    "opts": [
+      "Social / Cultural Envts.",
+      "Economic Environment",
+      "Technological Environment",
+      "Administrative Environment"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Innovation, IT infrastructure, and digital tools drive efficiency and belong to which environment?",
+    "opts": [
+      "Economic Environment",
+      "Social Environment",
+      "Technological Envts.",
+      "Regulatory Environment"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Recognizing a gap in the market or unmet need is which step in new venture creation?",
+    "opts": [
+      "Resource Mobilization",
+      "Opportunity Identification and Evaluation (Step 1)",
+      "Formal Business Launch",
+      "Regional Development"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Step 2 of New Venture Creation involves developing a structured business plan and assessing what?",
+    "opts": [
+      "Technical, financial, and market value of the idea",
+      "Internal management payroll schedules only",
+      "Historical traditional micro-loans from 1950",
+      "Direct pay-per-click ad spending daily"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What constitutes Resource Mobilization in Step 3?",
+    "opts": [
+      "Implementation",
+      "Gathering Human, Financial, and social Capital",
+      "Evaluation",
+      "Brainstorming"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Under diverse contexts, what is a common source of resource mobilization for new ventures?",
+    "opts": [
+      "Venture Capital, Angel Investors and Crowdfunding",
+      "Public crowding bonds",
+      "Tax refunds exclusively",
+      "Foreign national reserves"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Implementation and Business Launch (Step 4) involves putting plans into action via what means?",
+    "opts": [
+      "E-Business or Traditional physical trading",
+      "Only theoretical ideas with no action",
+      "Strictly public stock exchange listings",
+      "Zero operational delivery tracking"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Managing the business post-launch and ensuring long-term sustainability refers to which step?",
+    "opts": [
+      "Idea generation",
+      "Business Growth, Sustainability and Adaptation (Step 5)",
+      "Initial concept testing",
+      "Sourcing basic raw tools"
+    ],
+    "a": 1
+  },
+
+  {
+    "q": "What is E-Business?",
+    "opts": [
+      "Pushing standard retail stock via paper advertisements",
+      "A commercial interaction which utilizes computer network to ensure engagement of trading activities",
+      "Sourcing bank loans physically from micro-lenders",
+      "Organizing indoor administrative physical staff boards"
+    ],
+    "a": 1
+  },
+  {
+    "q": "A limited internet accessible only to selected employees and authorized outsiders is an:",
+    "opts": ["Intranet", "Extranet", "Public Web", "Core Database"],
+    "a": 1
+  },
+  {
+    "q": "An organization’s private internet is known as an:",
+    "opts": [
+      "Extranet",
+      "Intranet",
+      "Open source data analytics platform",
+      "Traditional paper filing tracking layout"
+    ],
+    "a": 1
+  },
+  {
+    "q": "E-Business enhances internal management processes such as:",
+    "opts": [
+      "Sourcing external venture capital lines",
+      "Employee services, training, internal information-sharing, and recruiting",
+      "Television commercials production",
+      "Managing external roadside digital boards"
+    ],
+    "a": 1
+  },
+  {
+    "q": "E-Business enhances customer-focused processes such as:",
+    "opts": [
+      "Procurement and raw stock replenishment",
+      "Promotional and marketing efforts, selling over the Internet",
+      "Internal staff upskilling systems",
+      "Structural layout of factory floors"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Why is E-Business cheaper than traditional business?",
+    "opts": [
+      "It avoids all tax and regulatory filings completely.",
+      "The cost to set up and transaction cost is effectively less.",
+      "It requires zero internet access tools.",
+      "It relies entirely on physical print brochures."
+    ],
+    "a": 1
+  },
+  {
+    "q": "What breaks down the time barriers that location-based businesses encounter?",
+    "opts": [
+      "Extranets",
+      "Flexible Business Hours",
+      "Supply Chain Management",
+      "Intranets"
+    ],
+    "a": 1
+  },
+  {
+    "q": "E-commerce is fundamentally defined as:",
+    "opts": [
+      "Internal organizational training platforms",
+      "The trading or facilitation of trading in products or services using computer networks",
+      "Buying goods exclusively with physical cash",
+      "Running television commercials"
+    ],
+    "a": 1
+  },
+  {
+    "q": "B2C stands for transactions between businesses and:",
+    "opts": [
+      "Individual consumers",
+      "Other businesses",
+      "Governments",
+      "Manufacturers"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What forces drive E-commerce?",
+    "opts": [
+      "Political lobbying groups only",
+      "Economic, Marketing/Interaction, and Technological Forces",
+      "Manual records and physical ledgers",
+      "Hierarchical organizational structures"
+    ],
+    "a": 1
+  },
+  {
+    "q": "E-Marketing is also known as:",
+    "opts": [
+      "Digital Marketing, Internet marketing, or online marketing",
+      "Societal marketing",
+      "Traditional marketing",
+      "Relationship marketing"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Which of the following is an exclusive tactic to digital marketing?",
+    "opts": [
+      "Standard print newspapers",
+      "In-app PPC ads and push notifications",
+      "Direct physical billboards using hand-painted paper",
+      "Door-to-door sales presentations"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Digital displays used for outdoor advertising to showcase images or videos to a large audience are called:",
+    "opts": ["In-app ads", "Electronic billboards", "Intranets", "Databases"],
+    "a": 1
+  },
+  {
+    "q": "Protecting customer data falls under which E-business challenge?",
+    "opts": [
+      "Cybersecurity",
+      "Supply Chain Management",
+      "Taxation and Tariffs",
+      "Regulatory Compliance"
+    ],
+    "a": 0
+  },
+
+  {
+    "q": "Entrepreneurial culture is defined as a set of values and attitudes that encourage what?",
+    "opts": [
+      "Absolute risk aversion and strict compliance loops",
+      "Innovation, risk-taking, and proactive problem solving",
+      "Slow, hierarchical administrative check routines",
+      "Short-term profit extraction above all else"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What percentage of employees in innovative cultures report higher job satisfaction according to Gallup (2023)?",
+    "opts": ["50%", "70%", "95%", "40%"],
+    "a": 1
+  },
+  {
+    "q": "Entrepreneurial firms drive what percentage of GDP in developed economies like China and the U.S.?",
+    "opts": ["10%", "25%", "50%", "85%"],
+    "a": 2
+  },
+  {
+    "q": "Anticipating and seizing opportunities is defined as which characteristic?",
+    "opts": ["Autonomy", "Proactivity", "Resilience", "Agility"],
+    "a": 1
+  },
+  {
+    "q": "The ability to make decisions independently within an entrepreneurial culture is called:",
+    "opts": [
+      "Autonomy",
+      "Strict top-down management",
+      "Calculated risk",
+      "Resilience"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Persistence in the face of challenges refers to:",
+    "opts": ["Autonomy", "Resilience", "Proactivity", "Collaboration"],
+    "a": 1
+  },
+  {
+    "q": "What is a key leadership role in fostering an entrepreneurial culture?",
+    "opts": [
+      "Enforcing strict penalties for experimental failures",
+      "Ability to take calculated risk and commit to innovation",
+      "Creating highly siloed operational departments",
+      "Minimizing long-term collaborative projects"
+    ],
+    "a": 1
+  },
+  {
+    "q": "To create a safe space for risk, an organization must normalize what as part of growth?",
+    "opts": [
+      "Rigid corporate compliance",
+      "Failure",
+      "Bonuses tied to daily transaction speed",
+      "Secret internal monitoring"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which of the following is a common challenge in fostering an entrepreneurial culture?",
+    "opts": [
+      "Excessive access to free unmapped funds",
+      "Resistance to change and resources constraint in startups",
+      "Too many flat management tiers",
+      "Zero external market competition"
+    ],
+    "a": 1
+  },
+
+  {
+    "q": "Entrepreneurship thrives on identifying situations where:",
+    "opts": [
+      "Supply massively exceeds consumer demand",
+      "Demand exceeds supply",
+      "Government subsidies remove all competition",
+      "Consumers stop buying items completely"
+    ],
+    "a": 1
+  },
+  {
+    "q": "A demand and supply gap occurs when the quantity of goods demanded:",
+    "opts": [
+      "Equals the quantity supplied",
+      "Exceeds the quantity supplied",
+      "Falls behind the quantity supplied",
+      "Is completely unpredictable"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What type of gap exists when demand is present but not expressed due to lack of awareness or access?",
+    "opts": ["Excess Demand", "Latent Demand", "Seasonal Gap", "Quality Gap"],
+    "a": 1
+  },
+  {
+    "q": "If existing products do not meet customer expectations, what gap occurs?",
+    "opts": [
+      "Latent Demand Gap",
+      "Seasonal Gap",
+      "Quality Gap",
+      "Currency Gap"
+    ],
+    "a": 2
+  },
+  {
+    "q": "A segment of the market where demand is not fully satisfied is known as a:",
+    "opts": [
+      "Saturated market",
+      "Market Gap",
+      "Technological Gap",
+      "Social Condition"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which of the following is a source of market gaps?",
+    "opts": [
+      "Excellent service delivery and low prices",
+      "Poor service delivery, high prices, and lack of accessibility",
+      "Perfect technical adoption matching across regions",
+      "Mass abundance of local raw resource items"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Unmet needs refer to customer problems that are:",
+    "opts": [
+      "Already fully satisfied",
+      "Not adequately solved by existing products",
+      "Created purely by marketing campaigns",
+      "Ignored due to low profitability"
+    ],
+    "a": 1
+  },
+  {
+    "q": "The systematic collection and analysis of data about customers, competitors, and market conditions is called:",
+    "opts": [
+      "Product Prototyping",
+      "Market research",
+      "Technology Adoption",
+      "Societal Marketing"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Surveys, interviews, and focus groups are examples of:",
+    "opts": [
+      "Primary Research",
+      "Secondary Research",
+      "Prototyping Tools",
+      "Climate Conditions"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Reports, journals, and government publications are examples of:",
+    "opts": [
+      "Primary Research",
+      "Secondary Research",
+      "Focus Groups",
+      "Unutilized Resources"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Resources that are available but not effectively used for productive purposes are called:",
+    "opts": [
+      "Venture Capital",
+      "Unutilized resources",
+      "Latent Demands",
+      "Extranets"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Youth unemployment is an example of what type of unutilized resource?",
+    "opts": [
+      "Natural Resources",
+      "Human Resources",
+      "Financial Resources",
+      "Technological Resources"
+    ],
+    "a": 1
+  },
+  {
+    "q": "The difference between available technology and its actual usage by individuals or organizations is called the:",
+    "opts": [
+      "Technology adoption gap",
+      "Quality gap",
+      "Latent demand",
+      "Unutilized resource gap"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Population growth, urbanization, and lifestyle changes are considered what kind of conditions?",
+    "opts": [
+      "Climate Conditions",
+      "Social Conditions",
+      "Economic Forces",
+      "Technical Adoption Variables"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Renewable energy and climate-smart agriculture are business opportunities arising from:",
+    "opts": [
+      "Social Conditions",
+      "Climate Conditions",
+      "Short-term market trends",
+      "E-commerce logistics"
+    ],
+    "a": 1
+  },
+
+  {
+    "q": "Entrepreneurial finance involves:",
+    "opts": [
+      "Calculating national balance of payments",
+      "Raising capital, managing business funds, investment decisions, and risk management",
+      "Avoiding all risk management tools",
+      "Managing large-scale public utilities"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Venture capital is a form of financing provided by investors to:",
+    "opts": [
+      "Failing traditional brick-and-mortar storefronts",
+      "New and high-growth businesses with strong potential",
+      "Government infrastructure parastatals",
+      "Informal short-term savings groups"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is a common disadvantage of taking venture capital?",
+    "opts": [
+      "Lack of business mentorship",
+      "Loss of partial ownership and investors may influence decisions",
+      "Strict obligations to repay loans with fixed high interest monthly",
+      "Total isolation from innovative modern markets"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Raising funds by selling shares or ownership interest in a business is called:",
+    "opts": [
+      "Debt financing",
+      "Equity finance",
+      "Microfinance loans",
+      "Crowdfunding grants"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is an advantage of Equity Finance over standard bank credit options?",
+    "opts": [
+      "No repayment obligation and reduces debt burden",
+      "Retaining 100% complete personal business ownership",
+      "Total elimination of internal management conflicts",
+      "Guaranteed instant profitability"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Microfinance refers to the provision of small loans and financial services primarily to:",
+    "opts": [
+      "Venture Capital syndicates",
+      "Low-income entrepreneurs and small businesses",
+      "Public stock markets",
+      "Angel investors"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which of the following is cited as an example of a microfinance institution supporting ventures in Nigeria?",
+    "opts": [
+      "Amazon retail network",
+      "LAPO Microfinance Bank",
+      "New York Stock Exchange",
+      "Silicon Valley Y-Combinator"
+    ],
+    "a": 1
+  },
+  {
+    "q": "An advantage of using personal savings for a business is:",
+    "opts": [
+      "It carries high microfinance group interest.",
+      "Full ownership is retained and there is no interest payment.",
+      "It entirely removes personal financial exposure risk.",
+      "It provides unlimited master capital pools."
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the objective of a business plan competition?",
+    "opts": [
+      "Enforce government taxes on new businesses",
+      "Identify viable business ideas and provide seed funding",
+      "Force startups into bankruptcy",
+      "Restrict cross-industry networking"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Entrepreneurial marketing refers to strategies that are:",
+    "opts": [
+      "Heavy on traditional print media",
+      "Innovative and low-cost",
+      "Reliant entirely on cold calling",
+      "Slow to adapt to changing markets"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Guerrilla marketing, content marketing, and influencer marketing are strategies associated with:",
+    "opts": [
+      "Production Concept",
+      "Entrepreneurial Marketing",
+      "Venture Capital acquisition",
+      "Traditional Business Communication"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is a key challenge facing entrepreneurial financing in Nigeria?",
+    "opts": [
+      "Oversupply of low-interest long-term credit",
+      "Poor access to capital, high interest rates, and inadequate collateral",
+      "Lack of local innovative business opportunities",
+      "Complete absence of personal savings"
+    ],
+    "a": 1
+  },
+
+  {
+    "q": "Negotiation is a process where two or more parties discuss issues in order to reach what?",
+    "opts": [
+      "A one-sided legal directive",
+      "A mutually acceptable agreement",
+      "An ongoing workplace conflict",
+      "Maximum short-term advertising clicks"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which strategy occurs when one party attempts to maximize personal gain with little concern for the other?",
+    "opts": [
+      "Cooperative Strategy",
+      "Competitive Strategy",
+      "Compromise Strategy",
+      "Avoidance Strategy"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Collaboration, trust building, and a long-term relationship focus are features of which negotiation strategy?",
+    "opts": [
+      "Competitive Strategy",
+      "Cooperative Strategy",
+      "Avoidance Strategy",
+      "E-marketing Strategy"
+    ],
+    "a": 1
+  },
+  {
+    "q": "When each party gives up something to reach an agreement, they are using a:",
+    "opts": [
+      "Avoidance Strategy",
+      "Compromise Strategy",
+      "Competitive Strategy",
+      "Defensive Strategy"
+    ],
+    "a": 1
+  },
+  {
+    "q": "A party that delays or avoids negotiation due to fear of conflict or lack of preparation is using the:",
+    "opts": [
+      "Cooperative model",
+      "Competitive method",
+      "Avoidance Strategy",
+      "Flattened framework"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Using silence to pressure the other party into speaking or conceding is an example of a negotiation:",
+    "opts": ["Tactic", "Flaw", "Resource mobilization", "Contract agreement"],
+    "a": 0
+  },
+  {
+    "q": "The tactic where one negotiator appears friendly while another appears strict is called:",
+    "opts": ["Bluffing", "Good Cop/Bad Cop", "Deadline Pressure", "Persuasion"],
+    "a": 1
+  },
+  {
+    "q": "Letters, memos, face-to-face meetings, and telephone calls are examples of:",
+    "opts": [
+      "Modern Business Communication Methods",
+      "Traditional Business Communication Methods",
+      "E-business Extranets",
+      "In-app marketing techniques"
+    ],
+    "a": 1
+  },
+  {
+    "q": "An advantage of modern business communication methods like email and video conferencing is:",
+    "opts": [
+      "Slower, manual record keeping",
+      "Faster communication and wider global reach",
+      "Elimination of all cybersecurity threats",
+      "Higher operational costs"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is a common limitation of traditional business communication methods?",
+    "opts": [
+      "Heavy dependency on the internet",
+      "Slower delivery and expensive in some cases",
+      "Cybersecurity risks",
+      "Information overload"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which of the following acts as a barrier to effective communication?",
+    "opts": [
+      "Using clear language",
+      "Language barriers, poor listening skills, and noise",
+      "Employing appropriate communication channels",
+      "Fast internet speeds"
+    ],
+    "a": 1
+  }
+]

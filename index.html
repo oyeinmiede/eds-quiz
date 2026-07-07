@@ -1,1522 +1,533 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>ENT321 — 30min Quiz</title>
-    <style>
-      :root {
-        --accent: #0b74de;
-        --bg: #f7f9fc;
-        --card: #fff;
-        --muted: #6b7280;
-      }
-      body {
-        font-family:
-          Inter,
-          system-ui,
-          Segoe UI,
-          Roboto,
-          Arial;
-        margin: 0;
-        background: var(--bg);
-        color: #111;
-      }
-      .wrap {
-        max-width: 900px;
-        margin: 28px auto;
-        padding: 20px;
-      }
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 18px;
-      }
-      h1 {
-        font-size: 20px;
-        margin: 0;
-      }
-      .meta {
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .card {
-        background: var(--card);
-        border-radius: 10px;
-        padding: 18px;
-        box-shadow: 0 6px 18px rgba(12, 20, 40, 0.06);
-      }
-      .topbar {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .timer {
-        font-weight: 700;
-        color: #fff;
-        background: var(--accent);
-        padding: 8px 12px;
-        border-radius: 8px;
-      }
-      .progress {
-        height: 10px;
-        background: #e6eefc;
-        border-radius: 6px;
-        overflow: hidden;
-        flex: 1;
-      }
-      .progress > i {
-        display: block;
-        height: 100%;
-        background: linear-gradient(90deg, var(--accent), #2aa0ff);
-        width: 0%;
-      }
-      .question-area {
-        margin-top: 16px;
-      }
-      .qnum {
-        color: var(--muted);
-        font-size: 13px;
-        margin-bottom: 6px;
-      }
-      .qtext {
-        font-size: 18px;
-        margin: 6px 0 14px;
-      }
-      .options {
-        display: grid;
-        gap: 10px;
-      }
-      .opt {
-        background: #f3f6fb;
-        border-radius: 8px;
-        padding: 12px;
-        cursor: pointer;
-        border: 1px solid transparent;
-      }
-      .opt.selected {
-        border-color: var(--accent);
-        background: linear-gradient(180deg, #eaf5ff, #f3f9ff);
-      }
-      .controls {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        margin-top: 14px;
-      }
-      button {
-        background: var(--accent);
-        color: #fff;
-        border: 0;
-        padding: 10px 14px;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-      button.secondary {
-        background: #eef3fb;
-        color: var(--accent);
-        border: 1px solid #d6e8ff;
-      }
-      .nav-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 12px;
-      }
-      .nav-btn {
-        width: 36px;
-        height: 36px;
-        border-radius: 6px;
-        border: 1px solid #e6eefc;
-        background: #fff;
-        cursor: pointer;
-      }
-      .nav-btn.answered {
-        background: #e6fff7;
-        border-color: #b6f0d8;
-      }
-      .result {
-        margin-top: 18px;
-      }
-      .correct {
-        color: green;
-        font-weight: 700;
-      }
-      .wrong {
-        color: #d9534f;
-        font-weight: 700;
-      }
-      footer {
-        margin-top: 18px;
-        color: var(--muted);
-        font-size: 13px;
-        text-align: center;
-      }
-      @media (max-width: 600px) {
-        .qtext {
-          font-size: 16px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <header>
-        <div>
-          <h1>ENT321 — 30‑Minute Quiz</h1>
-          <div class="meta">
-            110 multiple-choice questions • randomized • shows answers at end
-          </div>
-        </div>
-        <div class="topbar">
-          <div class="timer" id="timer">30:00</div>
-          <div style="width: 220px">
-            <div class="progress" aria-hidden="true"><i id="prog"></i></div>
-          </div>
-          <div class="meta" id="scoreMeta">Answered 0 / 110</div>
-        </div>
-      </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ENT321 — Quiz (Configurable)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand"><img src="logo.svg" alt="ENT321 logo" height="48"></div>
+      <div>
+        <h1>ENT321 — Quiz</h1>
+        <div class="meta">Choose settings, toggle dark mode, then start your quiz</div>
+      </div>
+      <div class="topbar">
+        <button id="themeToggle" class="secondary small">Dark</button>
+      </div>
+    </header>
 
-      <main class="card">
-        <div class="question-area" id="quizArea">
-          <!-- question injected here -->
+    <main class="card" id="mainCard">
+      <!-- Settings page -->
+      <section id="settingsPage">
+        <h2>Quiz Settings</h2>
+        <div class="form-row">
+          <label for="numQuestions">Number of questions</label>
+          <select id="numQuestions">
+            <!-- options populated by JS -->
+          </select>
         </div>
+
+        <div class="form-row">
+          <label for="timeMode">Time limit</label>
+          <select id="timeMode">
+            <option value="30">30 minutes</option>
+            <option value="20">20 minutes</option>
+            <option value="10">10 minutes</option>
+            <option value="0">No timer</option>
+            <option value="custom">Custom (minutes)</option>
+          </select>
+          <input id="customMinutes" type="number" min="1" placeholder="Minutes" style="width:110px;display:none;margin-left:8px">
+        </div>
+
+        <div class="form-row">
+          <label><input type="checkbox" id="allowRedo" checked> Allow redo (restart with same settings)</label>
+        </div>
+
+        <div class="form-row" style="margin-top:12px">
+          <button id="startBtn">Start Quiz</button>
+          <button id="loadDefaults" class="secondary">Reset to defaults</button>
+        </div>
+
+        <div class="note" style="margin-top:12px;color:var(--muted)">
+          You can change theme anytime. The quiz will auto-submit when time expires unless you choose No timer.
+        </div>
+      </section>
+
+      <!-- Quiz UI -->
+      <section id="quizUI" style="display:none">
+        <div class="quiz-header">
+          <div>
+            <div class="meta">ENT321 • <span id="totalCount">0</span> questions</div>
+            <div class="qprogress" id="qprogress"></div>
+          </div>
+          <div class="topbar">
+            <div class="timer" id="timer">00:00</div>
+            <div class="meta" id="scoreMeta">Answered 0 / 0</div>
+          </div>
+        </div>
+
+        <div class="question-area" id="quizArea"></div>
 
         <div class="controls">
           <button id="prevBtn" class="secondary">Previous</button>
           <button id="nextBtn" class="secondary">Next</button>
-          <button id="submitBtn" style="margin-left: auto">Submit Quiz</button>
+          <button id="submitBtn" style="margin-left:auto">Submit Quiz</button>
         </div>
 
-        <div
-          class="nav-grid"
-          id="navGrid"
-          aria-label="Question navigation"
-        ></div>
+        <div class="nav-grid" id="navGrid" aria-label="Question navigation"></div>
+      </section>
 
-        <div class="result" id="resultArea" style="display: none"></div>
-      </main>
+      <!-- Result UI -->
+      <section id="resultUI" style="display:none">
+        <div id="resultArea" class="result"></div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button id="restartSame" class="secondary">Redo (same settings)</button>
+          <button id="backToSettings">Change settings</button>
+          <button id="downloadBtn">Download Results CSV</button>
+        </div>
+      </section>
+    </main>
 
-      <footer>Built for ENT321 • Timer auto-submits when time expires.</footer>
-    </div>
+    <footer>
+      Built for ENT321 • Configurable quiz • Works offline
+    </footer>
+  </div>
 
-    <script>
-      /* QUESTIONS ARRAY (110 items) - sourced from provided lecture notes */
-      const QUESTIONS = [
-        {
-          q: "Innovation is the process of creating and implementing new ideas, products, services, or processes that add what?",
-          opts: ["A) Bureaucracy", "B) Value", "C) Inventions", "D) Divisions"],
-          a: 1,
-        },
-        {
-          q: "Innovation goes beyond mere invention because it strictly requires which two elements?",
-          opts: [
-            "A) R&D and capital",
-            "B) Execution and adoption",
-            "C) Creativity and luck",
-            "D) Motivation and vision",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which of the following is an objective of understanding an innovative culture?",
-          opts: [
-            "A) Increasing organizational bureaucracy",
-            "B) Learning key principles fostering innovation",
-            "C) Eliminating cross-functional teams",
-            "D) Driving short-term quarterly results",
-          ],
-          a: 1,
-        },
-        {
-          q: "What does psychological safety in an innovative culture prevent?",
-          opts: [
-            "A) Cross-industry insights",
-            "B) Customer-centric mindsets",
-            "C) Fear of ridicule or punishment",
-            "D) Experimentation",
-          ],
-          a: 2,
-        },
-        {
-          q: "A customer-centric mindset in innovation involves using which methodology?",
-          opts: [
-            "A) Aggressive sales persuasion",
-            "B) Lean startup methodology",
-            "C) High price skimming",
-            "D) Traditional hierarchy workflows",
-          ],
-          a: 1,
-        },
-        {
-          q: 'Which barrier to innovation is described as a force that "stifles creativity"?',
-          opts: [
-            "A) Siloed teams",
-            "B) Risk aversion",
-            "C) Bureaucracy",
-            "D) Prototyping",
-          ],
-          a: 1,
-        },
-        {
-          q: "How does bureaucracy act as a barrier to innovation?",
-          opts: [
-            "A) By creating cross-functional teams",
-            "B) By slowing down decision-making, which kills innovation",
-            "C) By over-rewarding failure",
-            "D) By flattening organizational hierarchies",
-          ],
-          a: 1,
-        },
-        {
-          q: "Overemphasis on quarterly results that discourages long-term R&D describes which barrier?",
-          opts: [
-            "A) Short-term focus",
-            "B) Siloed teams",
-            "C) Bureaucracy",
-            "D) Risk aversion",
-          ],
-          a: 0,
-        },
-        {
-          q: "Which of the following is a recommended step to build an innovation culture?",
-          opts: [
-            "A) Increase management layers",
-            "B) Flatten hierarchies to speed up decision-making",
-            "C) Penalize failed experiments",
-            "D) Reinforce strict boundaries between departments",
-          ],
-          a: 1,
-        },
-        {
-          q: "To spark multi-industry creativity, what actionable step is advised?",
-          opts: [
-            "A) Read internal reports only",
-            "B) Network outside your field",
-            "C) Isolate core teams",
-            "D) Avoid cross-functional engagement",
-          ],
-          a: 1,
-        },
-        {
-          q: 'Complete the quote from the notes: "Innovation is not about a single breakthrough but a culture that..."',
-          opts: [
-            "A) maximizes monthly sales volumes.",
-            "B) nurtures breakthroughs every day.",
-            "C) guarantees zero business failures.",
-            "D) eliminates all financial risks.",
-          ],
-          a: 1,
-        },
+<script>
+/* ENT321 configurable quiz app
+   - Loads questions.json if available; otherwise uses embedded fallback.
+   - Settings: number of questions, time (including No timer), allow redo.
+   - Dark mode toggle persisted in localStorage.
+*/
 
-        {
-          q: "Selling is defined as the process of what?",
-          opts: [
-            "A) Conducting strategic consumer market research",
-            "B) Persuading a customer to purchase a specific product or service",
-            "C) Creating long-term brand equity",
-            "D) Altering societal habits through micro-financing",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which activity is specifically tied to the selling process?",
-          opts: [
-            "A) Designing market research surveys",
-            "B) Handling objections and closing sales",
-            "C) Formulating the 4Ps strategic mix",
-            "D) Establishing public brand reputation",
-          ],
-          a: 1,
-        },
-        {
-          q: "What is the process of creating awareness, interest, and demand for a product or service?",
-          opts: [
-            "A) Production planning",
-            "B) Marketing",
-            "C) Prototyping",
-            "D) Concept testing",
-          ],
-          a: 1,
-        },
-        {
-          q: "According to the notes, selling focuses on converting leads into sales, while marketing focuses on what?",
-          opts: [
-            "A) Pushing existing products to the market",
-            "B) Creating leads and building brand awareness",
-            "C) Optimizing internal production systems",
-            "D) Handling standard client objections",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which evolution of marketing focuses concurrently on profit, customer welfare, and society?",
-          opts: [
-            "A) Digital Marketing",
-            "B) Relationship Marketing",
-            "C) Societal Marketing",
-            "D) Production Concept",
-          ],
-          a: 2,
-        },
-        {
-          q: "The Selling Concept is a philosophy heavily focused on moving existing products through what?",
-          opts: [
-            "A) Sensing and responding to customer desires",
-            "B) Aggressive promotion and persuasion",
-            "C) Custom sustainable ecosystems",
-            "D) Long-term relationship cultivation",
-          ],
-          a: 1,
-        },
-        {
-          q: "Under the Selling Concept, what is the core business view?",
-          opts: [
-            "A) Sense and Respond",
-            "B) Make and Sell",
-            "C) Analyze and Adapt",
-            "D) Segment and Target",
-          ],
-          a: 1,
-        },
-        {
-          q: "The Marketing Concept adopts which business view?",
-          opts: [
-            "A) Make and Sell",
-            "B) Sense and Respond",
-            "C) Produce and Push",
-            "D) Distribute and Dictate",
-          ],
-          a: 1,
-        },
-        {
-          q: "What time frame defines the strategic perspective of the Marketing Concept?",
-          opts: [
-            "A) Short-term",
-            "B) Long-term",
-            "C) Seasonal",
-            "D) Bi-weekly",
-          ],
-          a: 1,
-        },
-        {
-          q: "What are the primary tools used within the comprehensive Marketing Concept?",
-          opts: [
-            "A) Promotion, discounts, and persuasion alone",
-            "B) The 4Ps: Product, Price, Place, Promotion",
-            "C) Cold calling and quotas",
-            "D) Sourcing factory raw materials",
-          ],
-          a: 1,
-        },
-        {
-          q: "What represents a basic requirement for survival?",
-          opts: [
-            "A) Personal tastes and preferences",
-            "B) Needs",
-            "C) Specific products backed by money",
-            "D) Premium loyalty benefits",
-          ],
-          a: 1,
-        },
-        {
-          q: "When a basic survival requirement is directed toward personal preferences and tastes, it becomes a:",
-          opts: ["A) Demand", "B) Need", "C) Want", "D) Transaction"],
-          a: 2,
-        },
-        {
-          q: "A specific product that meets a consumer's want, backed by the ability to buy, is called:",
-          opts: [
-            "A) A demand",
-            "B) A general desire",
-            "C) An exchange relationship",
-            "D) A lead",
-          ],
-          a: 0,
-        },
-        {
-          q: "According to Peter Drucker, while selling aims to close deals, marketing aims to do what?",
-          opts: [
-            "A) Maximize sales volume immediately",
-            "B) Build relationships, drive engagement, and ultimately drive sales",
-            "C) Provide product information only",
-            "D) Handle objections directly",
-          ],
-          a: 1,
-        },
+// Try to fetch questions.json; fallback to embedded
+let QUESTIONS = null;
+fetch('questions.json').then(r=>r.json()).then(j=>{ QUESTIONS=j; initSettingsUI(); }).catch(()=>{ QUESTIONS = EMBEDDED_QUESTIONS; initSettingsUI(); });
 
-        {
-          q: "What is product development defined as by Krishnan & Ulrich (2001)?",
-          opts: [
-            "A) Execution of aggressive market clearance pricing",
-            "B) Transformation of a market opportunity into a product available for sale",
-            "C) Management of basic accounting registers",
-            "D) Elimination of external venture capital networks",
-          ],
-          a: 1,
-        },
-        {
-          q: "How many distinct stages of product development are outlined in these lecture notes?",
-          opts: ["A) Five (5)", "B) Seven (7)", "C) Ten (10)", "D) Three (3)"],
-          a: 1,
-        },
-        {
-          q: "What is the very first stage in the product development lifecycle?",
-          opts: [
-            "A) Testing and Validation",
-            "B) Production Planning",
-            "C) Idea Generation",
-            "D) Product Definition",
-          ],
-          a: 2,
-        },
-        {
-          q: "Brainstorming product concepts based on customer needs, competitor analysis, and R&D happens in which stage?",
-          opts: [
-            "A) Evaluation",
-            "B) Idea Generation",
-            "C) Launch and Commercialization",
-            "D) Feasibility Analysis",
-          ],
-          a: 1,
-        },
-        {
-          q: 'What does the "S" in the SCAMPER brainstorming technique stand for?',
-          opts: ["A) Strategy", "B) Substitute", "C) Synergy", "D) Short-term"],
-          a: 1,
-        },
-        {
-          q: "Transforming ideas into tangible concepts while assessing technical, financial, and market feasibility occurs in which stage?",
-          opts: [
-            "A) Production Planning",
-            "B) Idea Generation",
-            "C) Concept Development and Feasibility Analysis (Product Definition)",
-            "D) Post-Launch Evaluation",
-          ],
-          a: 2,
-        },
-        {
-          q: "Which lean tool is mentioned as part of defining the product concept strategy?",
-          opts: [
-            "A) Business model Canvas",
-            "B) Traditional 50-page ledger",
-            "C) Pay-Per-Click Ad Tracker",
-            "D) Hierarchy Flowchart",
-          ],
-          a: 0,
-        },
-        {
-          q: "Using CAD software and 3D modeling to construct prototypes happens during:",
-          opts: [
-            "A) Idea Generation",
-            "B) Evaluation",
-            "C) Design and Prototyping",
-            "D) Commercialization",
-          ],
-          a: 2,
-        },
-        {
-          q: "Conducting internal testing, external testing, and checking regulatory compliance is part of:",
-          opts: [
-            "A) Production Planning",
-            "B) Testing and Validation",
-            "C) Idea Generation",
-            "D) Market Sourcing",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which stage determines resource allocation, supplier selection, and manufacturing workflows?",
-          opts: [
-            "A) Idea Generation",
-            "B) Concept Sourcing",
-            "C) Production Planning",
-            "D) Post-Launch Evaluation",
-          ],
-          a: 2,
-        },
-        {
-          q: "Launching and commercialization involves introducing the product into the market using what framework?",
-          opts: [
-            "A) The SCAMPER model",
-            "B) Marketing Mix i.e 4Ps",
-            "C) The Triangular Environment Framework",
-            "D) Net Promoter Score ledger",
-          ],
-          a: 1,
-        },
-        {
-          q: "Monitoring sales, customer feedback, and tracking ROI using the Net Promoter Score (NPS) occurs in:",
-          opts: [
-            "A) Production Planning",
-            "B) Post-Launch Evaluation",
-            "C) Feasibility Assessment",
-            "D) Design Phase",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which product is cited as reiterating the design process to balance cost, quality, and user experience?",
-          opts: [
-            "A) Microsoft Windows",
-            "B) Apple product (iPhone)",
-            "C) Amazon Alexa",
-            "D) Google Glass",
-          ],
-          a: 1,
-        },
+// Embedded fallback (same content as your questions.json)
+const EMBEDDED_QUESTIONS = [
+  {"q":"Innovation is the process of creating and implementing new ideas, products, services, or processes that add what?","opts":["Bureaucracy","Value","Inventions","Divisions"],"a":1},
+  {"q":"Innovation goes beyond mere invention because it strictly requires which two elements?","opts":["R&D and capital","Execution and adoption","Creativity and luck","Motivation and vision"],"a":1},
+  {"q":"Which of the following is an objective of understanding an innovative culture?","opts":["Increasing organizational bureaucracy","Learning key principles fostering innovation","Eliminating cross-functional teams","Driving short-term quarterly results"],"a":1},
+  {"q":"What does psychological safety in an innovative culture prevent?","opts":["Cross-industry insights","Customer-centric mindsets","Fear of ridicule or punishment","Experimentation"],"a":2},
+  {"q":"A customer-centric mindset in innovation involves using which methodology?","opts":["Aggressive sales persuasion","Lean startup methodology","High price skimming","Traditional hierarchy workflows"],"a":1},
+  {"q":"Which barrier to innovation is described as a force that \"stifles creativity\"?","opts":["Siloed teams","Risk aversion","Bureaucracy","Prototyping"],"a":1},
+  {"q":"How does bureaucracy act as a barrier to innovation?","opts":["By creating cross-functional teams","By slowing down decision-making, which kills innovation","By over-rewarding failure","By flattening organizational hierarchies"],"a":1},
+  {"q":"Overemphasis on quarterly results that discourages long-term R&D describes which barrier?","opts":["Short-term focus","Siloed teams","Bureaucracy","Risk aversion"],"a":0},
+  {"q":"Which of the following is a recommended step to build an innovation culture?","opts":["Increase management layers","Flatten hierarchies to speed up decision-making","Penalize failed experiments","Reinforce strict boundaries between departments"],"a":1},
+  {"q":"To spark multi-industry creativity, what actionable step is advised?","opts":["Read internal reports only","Network outside your field","Isolate core teams","Avoid cross-functional engagement"],"a":1},
+  {"q":"Complete the quote from the notes: \"Innovation is not about a single breakthrough but a culture that...\"","opts":["maximizes monthly sales volumes.","nurtures breakthroughs every day.","guarantees zero business failures.","eliminates all financial risks."],"a":1},
 
-        {
-          q: "A business venture is essentially created to pursue what?",
-          opts: [
-            "A) Total market monopoly",
-            "B) A specific opportunity or idea",
-            "C) Corporate bureaucracy",
-            "D) Government subsidies",
-          ],
-          a: 1,
-        },
-        {
-          q: "What are the three components of the Triangular Diverse Environments?",
-          opts: [
-            "A) Human, Social, and Financial capital",
-            "B) Economic, Social / Cultural, and Technological environments",
-            "C) Advertising, Pricing, and Delivery channels",
-            "D) Sourcing, Production, and Evaluation steps",
-          ],
-          a: 1,
-        },
-        {
-          q: "Access to capital, labor market conditions, inflation, and consumer purchasing power belong to which environment?",
-          opts: [
-            "A) Cultural Environment",
-            "B) Economic Environment",
-            "C) Technological Environment",
-            "D) Political Isolation",
-          ],
-          a: 1,
-        },
-        {
-          q: "Societal norms, values, and beliefs that affect consumer behavior belong to which environment?",
-          opts: [
-            "A) Social / Cultural Envts.",
-            "B) Economic Environment",
-            "C) Technological Environment",
-            "D) Administrative Environment",
-          ],
-          a: 0,
-        },
-        {
-          q: "Innovation, IT infrastructure, and digital tools drive efficiency and belong to which environment?",
-          opts: [
-            "A) Economic Environment",
-            "B) Social Environment",
-            "C) Technological Envts.",
-            "D) Regulatory Environment",
-          ],
-          a: 2,
-        },
-        {
-          q: "Recognizing a gap in the market or unmet need is which step in new venture creation?",
-          opts: [
-            "A) Resource Mobilization",
-            "B) Opportunity Identification and Evaluation (Step 1)",
-            "C) Formal Business Launch",
-            "D) Regional Development",
-          ],
-          a: 1,
-        },
-        {
-          q: "Step 2 of New Venture Creation involves developing a structured business plan and assessing what?",
-          opts: [
-            "A) Technical, financial, and market value of the idea",
-            "B) Internal management payroll schedules only",
-            "C) Historical traditional micro-loans from 1950",
-            "D) Direct pay-per-click ad spending daily",
-          ],
-          a: 0,
-        },
-        {
-          q: "What constitutes Resource Mobilization in Step 3?",
-          opts: [
-            "A) Implementation",
-            "B) Gathering Human, Financial, and social Capital",
-            "C) Evaluation",
-            "D) Brainstorming",
-          ],
-          a: 1,
-        },
-        {
-          q: "Under diverse contexts, what is a common source of resource mobilization for new ventures?",
-          opts: [
-            "A) Venture Capital, Angel Investors and Crowdfunding",
-            "B) Public crowding bonds",
-            "C) Tax refunds exclusively",
-            "D) Foreign national reserves",
-          ],
-          a: 0,
-        },
-        {
-          q: "Implementation and Business Launch (Step 4) involves putting plans into action via what means?",
-          opts: [
-            "A) E-Business or Traditional physical trading",
-            "B) Only theoretical ideas with no action",
-            "C) Strictly public stock exchange listings",
-            "D) Zero operational delivery tracking",
-          ],
-          a: 0,
-        },
-        {
-          q: "Managing the business post-launch and ensuring long-term sustainability refers to which step?",
-          opts: [
-            "A) Idea generation",
-            "B) Business Growth, Sustainability and Adaptation (Step 5)",
-            "C) Initial concept testing",
-            "D) Sourcing basic raw tools",
-          ],
-          a: 1,
-        },
+  {"q":"Selling is defined as the process of what?","opts":["Conducting strategic consumer market research","Persuading a customer to purchase a specific product or service","Creating long-term brand equity","Altering societal habits through micro-financing"],"a":1},
+  {"q":"Which activity is specifically tied to the selling process?","opts":["Designing market research surveys","Handling objections and closing sales","Formulating the 4Ps strategic mix","Establishing public brand reputation"],"a":1},
+  {"q":"What is the process of creating awareness, interest, and demand for a product or service?","opts":["Production planning","Marketing","Prototyping","Concept testing"],"a":1},
+  {"q":"According to the notes, selling focuses on converting leads into sales, while marketing focuses on what?","opts":["Pushing existing products to the market","Creating leads and building brand awareness","Optimizing internal production systems","Handling standard client objections"],"a":1},
+  {"q":"Which evolution of marketing focuses concurrently on profit, customer welfare, and society?","opts":["Digital Marketing","Relationship Marketing","Societal Marketing","Production Concept"],"a":2},
+  {"q":"The Selling Concept is a philosophy heavily focused on moving existing products through what?","opts":["Sensing and responding to customer desires","Aggressive promotion and persuasion","Custom sustainable ecosystems","Long-term relationship cultivation"],"a":1},
+  {"q":"Under the Selling Concept, what is the core business view?","opts":["Sense and Respond","Make and Sell","Analyze and Adapt","Segment and Target"],"a":1},
+  {"q":"The Marketing Concept adopts which business view?","opts":["Make and Sell","Sense and Respond","Produce and Push","Distribute and Dictate"],"a":1},
+  {"q":"What time frame defines the strategic perspective of the Marketing Concept?","opts":["Short-term","Long-term","Seasonal","Bi-weekly"],"a":1},
+  {"q":"What are the primary tools used within the comprehensive Marketing Concept?","opts":["Promotion, discounts, and persuasion alone","The 4Ps: Product, Price, Place, Promotion","Cold calling and quotas","Sourcing factory raw materials"],"a":1},
+  {"q":"What represents a basic requirement for survival?","opts":["Personal tastes and preferences","Needs","Specific products backed by money","Premium loyalty benefits"],"a":1},
+  {"q":"When a basic survival requirement is directed toward personal preferences and tastes, it becomes a:","opts":["Demand","Need","Want","Transaction"],"a":2},
+  {"q":"A specific product that meets a consumer's want, backed by the ability to buy, is called:","opts":["A demand","A general desire","An exchange relationship","A lead"],"a":0},
+  {"q":"According to Peter Drucker, while selling aims to close deals, marketing aims to do what?","opts":["Maximize sales volume immediately","Build relationships, drive engagement, and ultimately drive sales","Provide product information only","Handle objections directly"],"a":1},
 
-        {
-          q: "What is E-Business?",
-          opts: [
-            "A) Pushing standard retail stock via paper advertisements",
-            "B) A commercial interaction which utilizes computer network to ensure engagement of trading activities",
-            "C) Sourcing bank loans physically from micro-lenders",
-            "D) Organizing indoor administrative physical staff boards",
-          ],
-          a: 1,
-        },
-        {
-          q: "A limited internet accessible only to selected employees and authorized outsiders is an:",
-          opts: [
-            "A) Intranet",
-            "B) Extranet",
-            "C) Public Web",
-            "D) Core Database",
-          ],
-          a: 1,
-        },
-        {
-          q: "An organization’s private internet is known as an:",
-          opts: [
-            "A) Extranet",
-            "B) Intranet",
-            "C) Open source data analytics platform",
-            "D) Traditional paper filing tracking layout",
-          ],
-          a: 1,
-        },
-        {
-          q: "E-Business enhances internal management processes such as:",
-          opts: [
-            "A) Sourcing external venture capital lines",
-            "B) Employee services, training, internal information-sharing, and recruiting",
-            "C) Television commercials production",
-            "D) Managing external roadside digital boards",
-          ],
-          a: 1,
-        },
-        {
-          q: "E-Business enhances customer-focused processes such as:",
-          opts: [
-            "A) Procurement and raw stock replenishment",
-            "B) Promotional and marketing efforts, selling over the Internet",
-            "C) Internal staff upskilling systems",
-            "D) Structural layout of factory floors",
-          ],
-          a: 1,
-        },
-        {
-          q: "Why is E-Business cheaper than traditional business?",
-          opts: [
-            "A) It avoids all tax and regulatory filings completely.",
-            "B) The cost to set up and transaction cost is effectively less.",
-            "C) It requires zero internet access tools.",
-            "D) It relies entirely on physical print brochures.",
-          ],
-          a: 1,
-        },
-        {
-          q: "What breaks down the time barriers that location-based businesses encounter?",
-          opts: [
-            "A) Extranets",
-            "B) Flexible Business Hours",
-            "C) Supply Chain Management",
-            "D) Intranets",
-          ],
-          a: 1,
-        },
-        {
-          q: "E-commerce is fundamentally defined as:",
-          opts: [
-            "A) Internal organizational training platforms",
-            "B) The trading or facilitation of trading in products or services using computer networks",
-            "C) Buying goods exclusively with physical cash",
-            "D) Running television commercials",
-          ],
-          a: 1,
-        },
-        {
-          q: "B2C stands for transactions between businesses and:",
-          opts: [
-            "A) Individual consumers",
-            "B) Other businesses",
-            "C) Governments",
-            "D) Manufacturers",
-          ],
-          a: 0,
-        },
-        {
-          q: "What forces drive E-commerce?",
-          opts: [
-            "A) Political lobbying groups only",
-            "B) Economic, Marketing/Interaction, and Technological Forces",
-            "C) Manual records and physical ledgers",
-            "D) Hierarchical organizational structures",
-          ],
-          a: 1,
-        },
-        {
-          q: "E-Marketing is also known as:",
-          opts: [
-            "A) Digital Marketing, Internet marketing, or online marketing",
-            "B) Societal marketing",
-            "C) Traditional marketing",
-            "D) Relationship marketing",
-          ],
-          a: 0,
-        },
-        {
-          q: "Which of the following is an exclusive tactic to digital marketing?",
-          opts: [
-            "A) Standard print newspapers",
-            "B) In-app PPC ads and push notifications",
-            "C) Direct physical billboards using hand-painted paper",
-            "D) Door-to-door sales presentations",
-          ],
-          a: 1,
-        },
-        {
-          q: "Digital displays used for outdoor advertising to showcase images or videos to a large audience are called:",
-          opts: [
-            "A) In-app ads",
-            "B) Electronic billboards",
-            "C) Intranets",
-            "D) Databases",
-          ],
-          a: 1,
-        },
-        {
-          q: "Protecting customer data falls under which E-business challenge?",
-          opts: [
-            "A) Cybersecurity",
-            "B) Supply Chain Management",
-            "C) Taxation and Tariffs",
-            "D) Regulatory Compliance",
-          ],
-          a: 0,
-        },
+  {"q":"What is product development defined as by Krishnan & Ulrich (2001)?","opts":["Execution of aggressive market clearance pricing","Transformation of a market opportunity into a product available for sale","Management of basic accounting registers","Elimination of external venture capital networks"],"a":1},
+  {"q":"How many distinct stages of product development are outlined in these lecture notes?","opts":["Five (5)","Seven (7)","Ten (10)","Three (3)"],"a":1},
+  {"q":"What is the very first stage in the product development lifecycle?","opts":["Testing and Validation","Production Planning","Idea Generation","Product Definition"],"a":2},
+  {"q":"Brainstorming product concepts based on customer needs, competitor analysis, and R&D happens in which stage?","opts":["Evaluation","Idea Generation","Launch and Commercialization","Feasibility Analysis"],"a":1},
+  {"q":"What does the \"S\" in the SCAMPER brainstorming technique stand for?","opts":["Strategy","Substitute","Synergy","Short-term"],"a":1},
+  {"q":"Transforming ideas into tangible concepts while assessing technical, financial, and market feasibility occurs in which stage?","opts":["Production Planning","Idea Generation","Concept Development and Feasibility Analysis (Product Definition)","Post-Launch Evaluation"],"a":2},
+  {"q":"Which lean tool is mentioned as part of defining the product concept strategy?","opts":["Business model Canvas","Traditional 50-page ledger","Pay-Per-Click Ad Tracker","Hierarchy Flowchart"],"a":0},
+  {"q":"Using CAD software and 3D modeling to construct prototypes happens during:","opts":["Idea Generation","Evaluation","Design and Prototyping","Commercialization"],"a":2},
+  {"q":"Conducting internal testing, external testing, and checking regulatory compliance is part of:","opts":["Production Planning","Testing and Validation","Idea Generation","Market Sourcing"],"a":1},
+  {"q":"Which stage determines resource allocation, supplier selection, and manufacturing workflows?","opts":["Idea Generation","Concept Sourcing","Production Planning","Post-Launch Evaluation"],"a":2},
+  {"q":"Launching and commercialization involves introducing the product into the market using what framework?","opts":["The SCAMPER model","Marketing Mix i.e 4Ps","The Triangular Environment Framework","Net Promoter Score ledger"],"a":1},
+  {"q":"Monitoring sales, customer feedback, and tracking ROI using the Net Promoter Score (NPS) occurs in:","opts":["Production Planning","Post-Launch Evaluation","Feasibility Assessment","Design Phase"],"a":1},
+  {"q":"Which product is cited as reiterating the design process to balance cost, quality, and user experience?","opts":["Microsoft Windows","Apple product (iPhone)","Amazon Alexa","Google Glass"],"a":1},
 
-        {
-          q: "Entrepreneurial culture is defined as a set of values and attitudes that encourage what?",
-          opts: [
-            "A) Absolute risk aversion and strict compliance loops",
-            "B) Innovation, risk-taking, and proactive problem solving",
-            "C) Slow, hierarchical administrative check routines",
-            "D) Short-term profit extraction above all else",
-          ],
-          a: 1,
-        },
-        {
-          q: "What percentage of employees in innovative cultures report higher job satisfaction according to Gallup (2023)?",
-          opts: ["A) 50%", "B) 70%", "C) 95%", "D) 40%"],
-          a: 1,
-        },
-        {
-          q: "Entrepreneurial firms drive what percentage of GDP in developed economies like China and the U.S.?",
-          opts: ["A) 10%", "B) 25%", "C) 50%", "D) 85%"],
-          a: 2,
-        },
-        {
-          q: "Anticipating and seizing opportunities is defined as which characteristic?",
-          opts: [
-            "A) Autonomy",
-            "B) Proactivity",
-            "C) Resilience",
-            "D) Agility",
-          ],
-          a: 1,
-        },
-        {
-          q: "The ability to make decisions independently within an entrepreneurial culture is called:",
-          opts: [
-            "A) Autonomy",
-            "B) Strict top-down management",
-            "C) Calculated risk",
-            "D) Resilience",
-          ],
-          a: 0,
-        },
-        {
-          q: "Persistence in the face of challenges refers to:",
-          opts: [
-            "A) Autonomy",
-            "B) Resilience",
-            "C) Proactivity",
-            "D) Collaboration",
-          ],
-          a: 1,
-        },
-        {
-          q: "What is a key leadership role in fostering an entrepreneurial culture?",
-          opts: [
-            "A) Enforcing strict penalties for experimental failures",
-            "B) Ability to take calculated risk and commit to innovation",
-            "C) Creating highly siloed operational departments",
-            "D) Minimizing long-term collaborative projects",
-          ],
-          a: 1,
-        },
-        {
-          q: "To create a safe space for risk, an organization must normalize what as part of growth?",
-          opts: [
-            "A) Rigid corporate compliance",
-            "B) Failure",
-            "C) Bonuses tied to daily transaction speed",
-            "D) Secret internal monitoring",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which of the following is a common challenge in fostering an entrepreneurial culture?",
-          opts: [
-            "A) Excessive access to free unmapped funds",
-            "B) Resistance to change and resources constraint in startups",
-            "C) Too many flat management tiers",
-            "D) Zero external market competition",
-          ],
-          a: 1,
-        },
+  {"q":"A business venture is essentially created to pursue what?","opts":["Total market monopoly","A specific opportunity or idea","Corporate bureaucracy","Government subsidies"],"a":1},
+  {"q":"What are the three components of the Triangular Diverse Environments?","opts":["Human, Social, and Financial capital","Economic, Social / Cultural, and Technological environments","Advertising, Pricing, and Delivery channels","Sourcing, Production, and Evaluation steps"],"a":1},
+  {"q":"Access to capital, labor market conditions, inflation, and consumer purchasing power belong to which environment?","opts":["Cultural Environment","Economic Environment","Technological Environment","Political Isolation"],"a":1},
+  {"q":"Societal norms, values, and beliefs that affect consumer behavior belong to which environment?","opts":["Social / Cultural Envts.","Economic Environment","Technological Environment","Administrative Environment"],"a":0},
+  {"q":"Innovation, IT infrastructure, and digital tools drive efficiency and belong to which environment?","opts":["Economic Environment","Social Environment","Technological Envts.","Regulatory Environment"],"a":2},
+  {"q":"Recognizing a gap in the market or unmet need is which step in new venture creation?","opts":["Resource Mobilization","Opportunity Identification and Evaluation (Step 1)","Formal Business Launch","Regional Development"],"a":1},
+  {"q":"Step 2 of New Venture Creation involves developing a structured business plan and assessing what?","opts":["Technical, financial, and market value of the idea","Internal management payroll schedules only","Historical traditional micro-loans from 1950","Direct pay-per-click ad spending daily"],"a":0},
+  {"q":"What constitutes Resource Mobilization in Step 3?","opts":["Implementation","Gathering Human, Financial, and social Capital","Evaluation","Brainstorming"],"a":1},
+  {"q":"Under diverse contexts, what is a common source of resource mobilization for new ventures?","opts":["Venture Capital, Angel Investors and Crowdfunding","Public crowding bonds","Tax refunds exclusively","Foreign national reserves"],"a":0},
+  {"q":"Implementation and Business Launch (Step 4) involves putting plans into action via what means?","opts":["E-Business or Traditional physical trading","Only theoretical ideas with no action","Strictly public stock exchange listings","Zero operational delivery tracking"],"a":0},
+  {"q":"Managing the business post-launch and ensuring long-term sustainability refers to which step?","opts":["Idea generation","Business Growth, Sustainability and Adaptation (Step 5)","Initial concept testing","Sourcing basic raw tools"],"a":1},
 
-        {
-          q: "Entrepreneurship thrives on identifying situations where:",
-          opts: [
-            "A) Supply massively exceeds consumer demand",
-            "B) Demand exceeds supply",
-            "C) Government subsidies remove all competition",
-            "D) Consumers stop buying items completely",
-          ],
-          a: 1,
-        },
-        {
-          q: "A demand and supply gap occurs when the quantity of goods demanded:",
-          opts: [
-            "A) Equals the quantity supplied",
-            "B) Exceeds the quantity supplied",
-            "C) Falls behind the quantity supplied",
-            "D) Is completely unpredictable",
-          ],
-          a: 1,
-        },
-        {
-          q: "What type of gap exists when demand is present but not expressed due to lack of awareness or access?",
-          opts: [
-            "A) Excess Demand",
-            "B) Latent Demand",
-            "C) Seasonal Gap",
-            "D) Quality Gap",
-          ],
-          a: 1,
-        },
-        {
-          q: "If existing products do not meet customer expectations, what gap occurs?",
-          opts: [
-            "A) Latent Demand Gap",
-            "B) Seasonal Gap",
-            "C) Quality Gap",
-            "D) Currency Gap",
-          ],
-          a: 2,
-        },
-        {
-          q: "A segment of the market where demand is not fully satisfied is known as a:",
-          opts: [
-            "A) Saturated market",
-            "B) Market Gap",
-            "C) Technological Gap",
-            "D) Social Condition",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which of the following is a source of market gaps?",
-          opts: [
-            "A) Excellent service delivery and low prices",
-            "B) Poor service delivery, high prices, and lack of accessibility",
-            "C) Perfect technical adoption matching across regions",
-            "D) Mass abundance of local raw resource items",
-          ],
-          a: 1,
-        },
-        {
-          q: "Unmet needs refer to customer problems that are:",
-          opts: [
-            "A) Already fully satisfied",
-            "B) Not adequately solved by existing products",
-            "C) Created purely by marketing campaigns",
-            "D) Ignored due to low profitability",
-          ],
-          a: 1,
-        },
-        {
-          q: "The systematic collection and analysis of data about customers, competitors, and market conditions is called:",
-          opts: [
-            "A) Product Prototyping",
-            "B) Market research",
-            "C) Technology Adoption",
-            "D) Societal Marketing",
-          ],
-          a: 1,
-        },
-        {
-          q: "Surveys, interviews, and focus groups are examples of:",
-          opts: [
-            "A) Primary Research",
-            "B) Secondary Research",
-            "C) Prototyping Tools",
-            "D) Climate Conditions",
-          ],
-          a: 0,
-        },
-        {
-          q: "Reports, journals, and government publications are examples of:",
-          opts: [
-            "A) Primary Research",
-            "B) Secondary Research",
-            "C) Focus Groups",
-            "D) Unutilized Resources",
-          ],
-          a: 1,
-        },
-        {
-          q: "Resources that are available but not effectively used for productive purposes are called:",
-          opts: [
-            "A) Venture Capital",
-            "B) Unutilized resources",
-            "C) Latent Demands",
-            "D) Extranets",
-          ],
-          a: 1,
-        },
-        {
-          q: "Youth unemployment is an example of what type of unutilized resource?",
-          opts: [
-            "A) Natural Resources",
-            "B) Human Resources",
-            "C) Financial Resources",
-            "D) Technological Resources",
-          ],
-          a: 1,
-        },
-        {
-          q: "The difference between available technology and its actual usage by individuals or organizations is called the:",
-          opts: [
-            "A) Technology adoption gap",
-            "B) Quality gap",
-            "C) Latent demand",
-            "D) Unutilized resource gap",
-          ],
-          a: 0,
-        },
-        {
-          q: "Population growth, urbanization, and lifestyle changes are considered what kind of conditions?",
-          opts: [
-            "A) Climate Conditions",
-            "B) Social Conditions",
-            "C) Economic Forces",
-            "D) Technical Adoption Variables",
-          ],
-          a: 1,
-        },
-        {
-          q: "Renewable energy and climate-smart agriculture are business opportunities arising from:",
-          opts: [
-            "A) Social Conditions",
-            "B) Climate Conditions",
-            "C) Short-term market trends",
-            "D) E-commerce logistics",
-          ],
-          a: 1,
-        },
+  {"q":"What is E-Business?","opts":["Pushing standard retail stock via paper advertisements","A commercial interaction which utilizes computer network to ensure engagement of trading activities","Sourcing bank loans physically from micro-lenders","Organizing indoor administrative physical staff boards"],"a":1},
+  {"q":"A limited internet accessible only to selected employees and authorized outsiders is an:","opts":["Intranet","Extranet","Public Web","Core Database"],"a":1},
+  {"q":"An organization’s private internet is known as an:","opts":["Extranet","Intranet","Open source data analytics platform","Traditional paper filing tracking layout"],"a":1},
+  {"q":"E-Business enhances internal management processes such as:","opts":["Sourcing external venture capital lines","Employee services, training, internal information-sharing, and recruiting","Television commercials production","Managing external roadside digital boards"],"a":1},
+  {"q":"E-Business enhances customer-focused processes such as:","opts":["Procurement and raw stock replenishment","Promotional and marketing efforts, selling over the Internet","Internal staff upskilling systems","Structural layout of factory floors"],"a":1},
+  {"q":"Why is E-Business cheaper than traditional business?","opts":["It avoids all tax and regulatory filings completely.","The cost to set up and transaction cost is effectively less.","It requires zero internet access tools.","It relies entirely on physical print brochures."],"a":1},
+  {"q":"What breaks down the time barriers that location-based businesses encounter?","opts":["Extranets","Flexible Business Hours","Supply Chain Management","Intranets"],"a":1},
+  {"q":"E-commerce is fundamentally defined as:","opts":["Internal organizational training platforms","The trading or facilitation of trading in products or services using computer networks","Buying goods exclusively with physical cash","Running television commercials"],"a":1},
+  {"q":"B2C stands for transactions between businesses and:","opts":["Individual consumers","Other businesses","Governments","Manufacturers"],"a":0},
+  {"q":"What forces drive E-commerce?","opts":["Political lobbying groups only","Economic, Marketing/Interaction, and Technological Forces","Manual records and physical ledgers","Hierarchical organizational structures"],"a":1},
+  {"q":"E-Marketing is also known as:","opts":["Digital Marketing, Internet marketing, or online marketing","Societal marketing","Traditional marketing","Relationship marketing"],"a":0},
+  {"q":"Which of the following is an exclusive tactic to digital marketing?","opts":["Standard print newspapers","In-app PPC ads and push notifications","Direct physical billboards using hand-painted paper","Door-to-door sales presentations"],"a":1},
+  {"q":"Digital displays used for outdoor advertising to showcase images or videos to a large audience are called:","opts":["In-app ads","Electronic billboards","Intranets","Databases"],"a":1},
+  {"q":"Protecting customer data falls under which E-business challenge?","opts":["Cybersecurity","Supply Chain Management","Taxation and Tariffs","Regulatory Compliance"],"a":0},
 
-        {
-          q: "Entrepreneurial finance involves:",
-          opts: [
-            "A) Calculating national balance of payments",
-            "B) Raising capital, managing business funds, investment decisions, and risk management",
-            "C) Avoiding all risk management tools",
-            "D) Managing large-scale public utilities",
-          ],
-          a: 1,
-        },
-        {
-          q: "Venture capital is a form of financing provided by investors to:",
-          opts: [
-            "A) Failing traditional brick-and-mortar storefronts",
-            "B) New and high-growth businesses with strong potential",
-            "C) Government infrastructure parastatals",
-            "D) Informal short-term savings groups",
-          ],
-          a: 1,
-        },
-        {
-          q: "What is a common disadvantage of taking venture capital?",
-          opts: [
-            "A) Lack of business mentorship",
-            "B) Loss of partial ownership and investors may influence decisions",
-            "C) Strict obligations to repay loans with fixed high interest monthly",
-            "D) Total isolation from innovative modern markets",
-          ],
-          a: 1,
-        },
-        {
-          q: "Raising funds by selling shares or ownership interest in a business is called:",
-          opts: [
-            "A) Debt financing",
-            "B) Equity finance",
-            "C) Microfinance loans",
-            "D) Crowdfunding grants",
-          ],
-          a: 1,
-        },
-        {
-          q: "What is an advantage of Equity Finance over standard bank credit options?",
-          opts: [
-            "A) No repayment obligation and reduces debt burden",
-            "B) Retaining 100% complete personal business ownership",
-            "C) Total elimination of internal management conflicts",
-            "D) Guaranteed instant profitability",
-          ],
-          a: 0,
-        },
-        {
-          q: "Microfinance refers to the provision of small loans and financial services primarily to:",
-          opts: [
-            "A) Venture Capital syndicates",
-            "B) Low-income entrepreneurs and small businesses",
-            "C) Public stock markets",
-            "D) Angel investors",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which of the following is cited as an example of a microfinance institution supporting ventures in Nigeria?",
-          opts: [
-            "A) Amazon retail network",
-            "B) LAPO Microfinance Bank",
-            "C) New York Stock Exchange",
-            "D) Silicon Valley Y-Combinator",
-          ],
-          a: 1,
-        },
-        {
-          q: "An advantage of using personal savings for a business is:",
-          opts: [
-            "A) It carries high microfinance group interest.",
-            "B) Full ownership is retained and there is no interest payment.",
-            "C) It entirely removes personal financial exposure risk.",
-            "D) It provides unlimited master capital pools.",
-          ],
-          a: 1,
-        },
-        {
-          q: "What is the objective of a business plan competition?",
-          opts: [
-            "A) Enforce government taxes on new businesses",
-            "B) Identify viable business ideas and provide seed funding",
-            "C) Force startups into bankruptcy",
-            "D) Restrict cross-industry networking",
-          ],
-          a: 1,
-        },
-        {
-          q: "Entrepreneurial marketing refers to strategies that are:",
-          opts: [
-            "A) Heavy on traditional print media",
-            "B) Innovative and low-cost",
-            "C) Reliant entirely on cold calling",
-            "D) Slow to adapt to changing markets",
-          ],
-          a: 1,
-        },
-        {
-          q: "Guerrilla marketing, content marketing, and influencer marketing are strategies associated with:",
-          opts: [
-            "A) Production Concept",
-            "B) Entrepreneurial Marketing",
-            "C) Venture Capital acquisition",
-            "D) Traditional Business Communication",
-          ],
-          a: 1,
-        },
-        {
-          q: "What is a key challenge facing entrepreneurial financing in Nigeria?",
-          opts: [
-            "A) Oversupply of low-interest long-term credit",
-            "B) Poor access to capital, high interest rates, and inadequate collateral",
-            "C) Lack of local innovative business opportunities",
-            "D) Complete absence of personal savings",
-          ],
-          a: 1,
-        },
+  {"q":"Entrepreneurial culture is defined as a set of values and attitudes that encourage what?","opts":["Absolute risk aversion and strict compliance loops","Innovation, risk-taking, and proactive problem solving","Slow, hierarchical administrative check routines","Short-term profit extraction above all else"],"a":1},
+  {"q":"What percentage of employees in innovative cultures report higher job satisfaction according to Gallup (2023)?","opts":["50%","70%","95%","40%"],"a":1},
+  {"q":"Entrepreneurial firms drive what percentage of GDP in developed economies like China and the U.S.?","opts":["10%","25%","50%","85%"],"a":2},
+  {"q":"Anticipating and seizing opportunities is defined as which characteristic?","opts":["Autonomy","Proactivity","Resilience","Agility"],"a":1},
+  {"q":"The ability to make decisions independently within an entrepreneurial culture is called:","opts":["Autonomy","Strict top-down management","Calculated risk","Resilience"],"a":0},
+  {"q":"Persistence in the face of challenges refers to:","opts":["Autonomy","Resilience","Proactivity","Collaboration"],"a":1},
+  {"q":"What is a key leadership role in fostering an entrepreneurial culture?","opts":["Enforcing strict penalties for experimental failures","Ability to take calculated risk and commit to innovation","Creating highly siloed operational departments","Minimizing long-term collaborative projects"],"a":1},
+  {"q":"To create a safe space for risk, an organization must normalize what as part of growth?","opts":["Rigid corporate compliance","Failure","Bonuses tied to daily transaction speed","Secret internal monitoring"],"a":1},
+  {"q":"Which of the following is a common challenge in fostering an entrepreneurial culture?","opts":["Excessive access to free unmapped funds","Resistance to change and resources constraint in startups","Too many flat management tiers","Zero external market competition"],"a":1},
 
-        {
-          q: "Negotiation is a process where two or more parties discuss issues in order to reach what?",
-          opts: [
-            "A) A one-sided legal directive",
-            "B) A mutually acceptable agreement",
-            "C) An ongoing workplace conflict",
-            "D) Maximum short-term advertising clicks",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which strategy occurs when one party attempts to maximize personal gain with little concern for the other?",
-          opts: [
-            "A) Cooperative Strategy",
-            "B) Competitive Strategy",
-            "C) Compromise Strategy",
-            "D) Avoidance Strategy",
-          ],
-          a: 1,
-        },
-        {
-          q: "Collaboration, trust building, and a long-term relationship focus are features of which negotiation strategy?",
-          opts: [
-            "A) Competitive Strategy",
-            "B) Cooperative Strategy",
-            "C) Avoidance Strategy",
-            "D) E-marketing Strategy",
-          ],
-          a: 1,
-        },
-        {
-          q: "When each party gives up something to reach an agreement, they are using a:",
-          opts: [
-            "A) Avoidance Strategy",
-            "B) Compromise Strategy",
-            "C) Competitive Strategy",
-            "D) Defensive Strategy",
-          ],
-          a: 1,
-        },
-        {
-          q: "A party that delays or avoids negotiation due to fear of conflict or lack of preparation is using the:",
-          opts: [
-            "A) Cooperative model",
-            "B) Competitive method",
-            "C) Avoidance Strategy",
-            "D) Flattened framework",
-          ],
-          a: 2,
-        },
-        {
-          q: "Using silence to pressure the other party into speaking or conceding is an example of a negotiation:",
-          opts: [
-            "A) Tactic",
-            "B) Flaw",
-            "C) Resource mobilization",
-            "D) Contract agreement",
-          ],
-          a: 0,
-        },
-        {
-          q: "The tactic where one negotiator appears friendly while another appears strict is called:",
-          opts: [
-            "A) Bluffing",
-            "B) Good Cop/Bad Cop",
-            "C) Deadline Pressure",
-            "D) Persuasion",
-          ],
-          a: 1,
-        },
-        {
-          q: "Letters, memos, face-to-face meetings, and telephone calls are examples of:",
-          opts: [
-            "A) Modern Business Communication Methods",
-            "B) Traditional Business Communication Methods",
-            "C) E-business Extranets",
-            "D) In-app marketing techniques",
-          ],
-          a: 1,
-        },
-        {
-          q: "An advantage of modern business communication methods like email and video conferencing is:",
-          opts: [
-            "A) Slower, manual record keeping",
-            "B) Faster communication and wider global reach",
-            "C) Elimination of all cybersecurity threats",
-            "D) Higher operational costs",
-          ],
-          a: 1,
-        },
-        {
-          q: "What is a common limitation of traditional business communication methods?",
-          opts: [
-            "A) Heavy dependency on the internet",
-            "B) Slower delivery and expensive in some cases",
-            "C) Cybersecurity risks",
-            "D) Information overload",
-          ],
-          a: 1,
-        },
-        {
-          q: "Which of the following acts as a barrier to effective communication?",
-          opts: [
-            "A) Using clear language",
-            "B) Language barriers, poor listening skills, and noise",
-            "C) Employing appropriate communication channels",
-            "D) Fast internet speeds",
-          ],
-          a: 1,
-        },
-      ];
+  {"q":"Entrepreneurship thrives on identifying situations where:","opts":["Supply massively exceeds consumer demand","Demand exceeds supply","Government subsidies remove all competition","Consumers stop buying items completely"],"a":1},
+  {"q":"A demand and supply gap occurs when the quantity of goods demanded:","opts":["Equals the quantity supplied","Exceeds the quantity supplied","Falls behind the quantity supplied","Is completely unpredictable"],"a":1},
+  {"q":"What type of gap exists when demand is present but not expressed due to lack of awareness or access?","opts":["Excess Demand","Latent Demand","Seasonal Gap","Quality Gap"],"a":1},
+  {"q":"If existing products do not meet customer expectations, what gap occurs?","opts":["Latent Demand Gap","Seasonal Gap","Quality Gap","Currency Gap"],"a":2},
+  {"q":"A segment of the market where demand is not fully satisfied is known as a:","opts":["Saturated market","Market Gap","Technological Gap","Social Condition"],"a":1},
+  {"q":"Which of the following is a source of market gaps?","opts":["Excellent service delivery and low prices","Poor service delivery, high prices, and lack of accessibility","Perfect technical adoption matching across regions","Mass abundance of local raw resource items"],"a":1},
+  {"q":"Unmet needs refer to customer problems that are:","opts":["Already fully satisfied","Not adequately solved by existing products","Created purely by marketing campaigns","Ignored due to low profitability"],"a":1},
+  {"q":"The systematic collection and analysis of data about customers, competitors, and market conditions is called:","opts":["Product Prototyping","Market research","Technology Adoption","Societal Marketing"],"a":1},
+  {"q":"Surveys, interviews, and focus groups are examples of:","opts":["Primary Research","Secondary Research","Prototyping Tools","Climate Conditions"],"a":0},
+  {"q":"Reports, journals, and government publications are examples of:","opts":["Primary Research","Secondary Research","Focus Groups","Unutilized Resources"],"a":1},
+  {"q":"Resources that are available but not effectively used for productive purposes are called:","opts":["Venture Capital","Unutilized resources","Latent Demands","Extranets"],"a":1},
+  {"q":"Youth unemployment is an example of what type of unutilized resource?","opts":["Natural Resources","Human Resources","Financial Resources","Technological Resources"],"a":1},
+  {"q":"The difference between available technology and its actual usage by individuals or organizations is called the:","opts":["Technology adoption gap","Quality gap","Latent demand","Unutilized resource gap"],"a":0},
+  {"q":"Population growth, urbanization, and lifestyle changes are considered what kind of conditions?","opts":["Climate Conditions","Social Conditions","Economic Forces","Technical Adoption Variables"],"a":1},
+  {"q":"Renewable energy and climate-smart agriculture are business opportunities arising from:","opts":["Social Conditions","Climate Conditions","Short-term market trends","E-commerce logistics"],"a":1},
 
-      /* Utility: shuffle array in-place */
-      function shuffle(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-      }
+  {"q":"Entrepreneurial finance involves:","opts":["Calculating national balance of payments","Raising capital, managing business funds, investment decisions, and risk management","Avoiding all risk management tools","Managing large-scale public utilities"],"a":1},
+  {"q":"Venture capital is a form of financing provided by investors to:","opts":["Failing traditional brick-and-mortar storefronts","New and high-growth businesses with strong potential","Government infrastructure parastatals","Informal short-term savings groups"],"a":1},
+  {"q":"What is a common disadvantage of taking venture capital?","opts":["Lack of business mentorship","Loss of partial ownership and investors may influence decisions","Strict obligations to repay loans with fixed high interest monthly","Total isolation from innovative modern markets"],"a":1},
+  {"q":"Raising funds by selling shares or ownership interest in a business is called:","opts":["Debt financing","Equity finance","Microfinance loans","Crowdfunding grants"],"a":1},
+  {"q":"What is an advantage of Equity Finance over standard bank credit options?","opts":["No repayment obligation and reduces debt burden","Retaining 100% complete personal business ownership","Total elimination of internal management conflicts","Guaranteed instant profitability"],"a":0},
+  {"q":"Microfinance refers to the provision of small loans and financial services primarily to:","opts":["Venture Capital syndicates","Low-income entrepreneurs and small businesses","Public stock markets","Angel investors"],"a":1},
+  {"q":"Which of the following is cited as an example of a microfinance institution supporting ventures in Nigeria?","opts":["Amazon retail network","LAPO Microfinance Bank","New York Stock Exchange","Silicon Valley Y-Combinator"],"a":1},
+  {"q":"An advantage of using personal savings for a business is:","opts":["It carries high microfinance group interest.","Full ownership is retained and there is no interest payment.","It entirely removes personal financial exposure risk.","It provides unlimited master capital pools."],"a":1},
+  {"q":"What is the objective of a business plan competition?","opts":["Enforce government taxes on new businesses","Identify viable business ideas and provide seed funding","Force startups into bankruptcy","Restrict cross-industry networking"],"a":1},
+  {"q":"Entrepreneurial marketing refers to strategies that are:","opts":["Heavy on traditional print media","Innovative and low-cost","Reliant entirely on cold calling","Slow to adapt to changing markets"],"a":1},
+  {"q":"Guerrilla marketing, content marketing, and influencer marketing are strategies associated with:","opts":["Production Concept","Entrepreneurial Marketing","Venture Capital acquisition","Traditional Business Communication"],"a":1},
+  {"q":"What is a key challenge facing entrepreneurial financing in Nigeria?","opts":["Oversupply of low-interest long-term credit","Poor access to capital, high interest rates, and inadequate collateral","Lack of local innovative business opportunities","Complete absence of personal savings"],"a":1},
 
-      /* Prepare quiz state */
-      let state = {
-        questions: [],
-        current: 0,
-        answers: Array(QUESTIONS.length).fill(null),
-        startedAt: null,
-        durationSec: 30 * 60, // 30 minutes
-      };
+  {"q":"Negotiation is a process where two or more parties discuss issues in order to reach what?","opts":["A one-sided legal directive","A mutually acceptable agreement","An ongoing workplace conflict","Maximum short-term advertising clicks"],"a":1},
+  {"q":"Which strategy occurs when one party attempts to maximize personal gain with little concern for the other?","opts":["Cooperative Strategy","Competitive Strategy","Compromise Strategy","Avoidance Strategy"],"a":1},
+  {"q":"Collaboration, trust building, and a long-term relationship focus are features of which negotiation strategy?","opts":["Competitive Strategy","Cooperative Strategy","Avoidance Strategy","E-marketing Strategy"],"a":1},
+  {"q":"When each party gives up something to reach an agreement, they are using a:","opts":["Avoidance Strategy","Compromise Strategy","Competitive Strategy","Defensive Strategy"],"a":1},
+  {"q":"A party that delays or avoids negotiation due to fear of conflict or lack of preparation is using the:","opts":["Cooperative model","Competitive method","Avoidance Strategy","Flattened framework"],"a":2},
+  {"q":"Using silence to pressure the other party into speaking or conceding is an example of a negotiation:","opts":["Tactic","Flaw","Resource mobilization","Contract agreement"],"a":0},
+  {"q":"The tactic where one negotiator appears friendly while another appears strict is called:","opts":["Bluffing","Good Cop/Bad Cop","Deadline Pressure","Persuasion"],"a":1},
+  {"q":"Letters, memos, face-to-face meetings, and telephone calls are examples of:","opts":["Modern Business Communication Methods","Traditional Business Communication Methods","E-business Extranets","In-app marketing techniques"],"a":1},
+  {"q":"An advantage of modern business communication methods like email and video conferencing is:","opts":["Slower, manual record keeping","Faster communication and wider global reach","Elimination of all cybersecurity threats","Higher operational costs"],"a":1},
+  {"q":"What is a common limitation of traditional business communication methods?","opts":["Heavy dependency on the internet","Slower delivery and expensive in some cases","Cybersecurity risks","Information overload"],"a":1},
+  {"q":"Which of the following acts as a barrier to effective communication?","opts":["Using clear language","Language barriers, poor listening skills, and noise","Employing appropriate communication channels","Fast internet speeds"],"a":1}
+];
 
-      /* Initialize: clone and randomize questions and options */
-      function initQuiz() {
-        // deep clone
-        state.questions = QUESTIONS.map((q) => ({
-          q: q.q,
-          opts: q.opts.slice(),
-          a: q.a,
-        }));
-        // shuffle questions
-        shuffle(state.questions);
-        // shuffle options for each question but keep track of correct index
-        state.questions.forEach((item) => {
-          const original = item.opts.map((o, i) => ({ o, i }));
-          shuffle(original);
-          item.opts = original.map((x) => x.o);
-          // find new index where original index === item.a
-          item.a = original.findIndex((x) => x.i === item.a);
-        });
-        state.answers = Array(state.questions.length).fill(null);
-        state.current = 0;
-        state.startedAt = Date.now();
-        renderQuestion();
-        renderNav();
-        updateScoreMeta();
-        startTimer();
-      }
+// Utility
+function shuffle(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } }
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
 
-      /* Render question */
-      function renderQuestion() {
-        const area = document.getElementById("quizArea");
-        const idx = state.current;
-        const item = state.questions[idx];
-        const answered = state.answers[idx] !== null;
-        const qnum = idx + 1;
-        area.innerHTML = `
-    <div class="qnum">Question ${qnum} of ${state.questions.length}</div>
+// App state
+let state = {
+  questions: [],
+  current: 0,
+  answers: [],
+  startedAt: null,
+  durationSec: 0,
+  timerEnabled: true,
+  settings: { numQuestions: 30, minutes: 30, allowRedo: true }
+};
+let timerInterval = null;
+
+// Elements
+const settingsPage = document.getElementById('settingsPage');
+const quizUI = document.getElementById('quizUI');
+const resultUI = document.getElementById('resultUI');
+const startBtn = document.getElementById('startBtn');
+const numQuestionsEl = document.getElementById('numQuestions');
+const timeModeEl = document.getElementById('timeMode');
+const customMinutesEl = document.getElementById('customMinutes');
+const allowRedoEl = document.getElementById('allowRedo');
+const loadDefaultsBtn = document.getElementById('loadDefaults');
+const themeToggle = document.getElementById('themeToggle');
+
+const quizArea = document.getElementById('quizArea');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const navGrid = document.getElementById('navGrid');
+const timerEl = document.getElementById('timer');
+const scoreMeta = document.getElementById('scoreMeta');
+const totalCountEl = document.getElementById('totalCount');
+const qprogress = document.getElementById('qprogress');
+
+const resultArea = document.getElementById('resultArea');
+const restartSameBtn = document.getElementById('restartSame');
+const backToSettingsBtn = document.getElementById('backToSettings');
+const downloadBtn = document.getElementById('downloadBtn');
+
+// Theme
+function applyTheme(dark){
+  document.documentElement.toggleAttribute('data-theme-dark', !!dark);
+  themeToggle.textContent = dark ? 'Light' : 'Dark';
+  localStorage.setItem('ent321_theme_dark', dark ? '1' : '0');
+}
+themeToggle.addEventListener('click', ()=> applyTheme(localStorage.getItem('ent321_theme_dark') !== '1'));
+
+// Settings UI init
+function initSettingsUI(){
+  // populate numQuestions options (10..110 step 10, plus 110)
+  numQuestionsEl.innerHTML = '';
+  const steps = [10,20,30,40,50,60,70,80,90,100,110];
+  steps.forEach(n=>{
+    const opt = document.createElement('option'); opt.value = n; opt.textContent = n;
+    numQuestionsEl.appendChild(opt);
+  });
+  // load saved settings if any
+  const saved = JSON.parse(localStorage.getItem('ent321_settings') || 'null');
+  if(saved){
+    numQuestionsEl.value = saved.numQuestions || 30;
+    if(saved.minutes === 0) timeModeEl.value = '0';
+    else if([10,20,30].includes(saved.minutes)) timeModeEl.value = String(saved.minutes);
+    else { timeModeEl.value = 'custom'; customMinutesEl.style.display='inline-block'; customMinutesEl.value = saved.minutes; }
+    allowRedoEl.checked = saved.allowRedo !== false;
+  } else {
+    // defaults
+    numQuestionsEl.value = 30;
+    timeModeEl.value = '30';
+    allowRedoEl.checked = true;
+  }
+  // theme
+  const dark = localStorage.getItem('ent321_theme_dark') === '1';
+  applyTheme(dark);
+
+  // timeMode change
+  timeModeEl.addEventListener('change', ()=>{
+    if(timeModeEl.value === 'custom'){ customMinutesEl.style.display='inline-block'; }
+    else { customMinutesEl.style.display='none'; }
+  });
+
+  // start
+  startBtn.addEventListener('click', startFromSettings);
+  loadDefaultsBtn.addEventListener('click', ()=>{
+    numQuestionsEl.value = 30; timeModeEl.value = '30'; customMinutesEl.value=''; customMinutesEl.style.display='none'; allowRedoEl.checked=true;
+    localStorage.removeItem('ent321_settings');
+  });
+
+  // result controls
+  restartSameBtn.addEventListener('click', ()=> startQuizWithSettings(state.settings));
+  backToSettingsBtn.addEventListener('click', ()=> { showSettings(); });
+  downloadBtn.addEventListener('click', ()=> {
+    // trigger download of last results if present
+    const csvEl = document.getElementById('lastResultsCSV');
+    if(csvEl) csvEl.click();
+    else alert('No results available to download yet.');
+  });
+
+  // navigation
+  prevBtn.addEventListener('click', ()=> { if(state.current>0){ state.current--; renderQuestion(); }});
+  nextBtn.addEventListener('click', ()=> { if(state.current < state.questions.length-1){ state.current++; renderQuestion(); }});
+  submitBtn.addEventListener('click', ()=> { if(confirm('Submit quiz now?')) finishQuiz(); });
+
+  // theme initial label
+  themeToggle.textContent = localStorage.getItem('ent321_theme_dark') === '1' ? 'Light' : 'Dark';
+}
+
+// Start from settings
+function startFromSettings(){
+  const num = parseInt(numQuestionsEl.value,10) || 30;
+  let minutes = 0;
+  if(timeModeEl.value === 'custom'){
+    minutes = parseInt(customMinutesEl.value,10) || 0;
+  } else {
+    minutes = parseInt(timeModeEl.value,10);
+  }
+  const allowRedo = !!allowRedoEl.checked;
+  const minutesFinal = isNaN(minutes) ? 0 : minutes;
+  const settings = { numQuestions: Math.min(num, QUESTIONS.length), minutes: minutesFinal, allowRedo };
+  localStorage.setItem('ent321_settings', JSON.stringify(settings));
+  state.settings = settings;
+  startQuizWithSettings(settings);
+}
+
+// Show settings
+function showSettings(){
+  clearInterval(timerInterval);
+  settingsPage.style.display = ''; quizUI.style.display='none'; resultUI.style.display='none';
+  document.getElementById('mainCard').scrollIntoView({behavior:'smooth'});
+}
+
+// Start quiz with chosen settings
+function startQuizWithSettings(settings){
+  // prepare questions
+  state.questions = QUESTIONS.map(q=>({ q: q.q, opts: q.opts.slice(), a: q.a }));
+  shuffle(state.questions);
+  // limit to requested number
+  state.questions = state.questions.slice(0, settings.numQuestions);
+  // shuffle options and update correct index
+  state.questions.forEach(item=>{
+    const original = item.opts.map((o,i)=>({o,i}));
+    shuffle(original);
+    item.opts = original.map(x=>x.o);
+    item.a = original.findIndex(x=>x.i === item.a);
+  });
+  state.answers = Array(state.questions.length).fill(null);
+  state.current = 0;
+  state.startedAt = Date.now();
+  state.durationSec = (settings.minutes && settings.minutes>0) ? settings.minutes*60 : 0;
+  state.timerEnabled = state.durationSec > 0;
+  state.settings = settings;
+
+  // UI
+  settingsPage.style.display='none';
+  quizUI.style.display='';
+  resultUI.style.display='none';
+  totalCountEl.textContent = state.questions.length;
+  renderQuestion();
+  renderNav();
+  updateScoreMeta();
+  if(state.timerEnabled) startTimer(); else timerEl.textContent = 'No timer';
+  document.getElementById('mainCard').scrollIntoView({behavior:'smooth'});
+}
+
+// Render question
+function renderQuestion(){
+  const idx = state.current;
+  const item = state.questions[idx];
+  quizArea.innerHTML = `
+    <div class="qnum">Question ${idx+1} of ${state.questions.length}</div>
     <div class="qtext">${escapeHtml(item.q)}</div>
     <div class="options" id="opts">
-      ${item.opts.map((opt, i) => `<div class="opt" data-i="${i}" role="button" tabindex="0">${escapeHtml(opt)}</div>`).join("")}
+      ${item.opts.map((opt,i)=>`<div class="opt" data-i="${i}" role="button" tabindex="0">${escapeHtml(opt)}</div>`).join('')}
     </div>
   `;
-        // attach handlers
-        document.querySelectorAll("#opts .opt").forEach((el) => {
-          el.addEventListener("click", () =>
-            selectOption(parseInt(el.dataset.i)),
-          );
-          el.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") selectOption(parseInt(el.dataset.i));
-          });
-          if (state.answers[idx] === parseInt(el.dataset.i))
-            el.classList.add("selected");
-        });
-      }
+  document.querySelectorAll('#opts .opt').forEach(el=>{
+    el.addEventListener('click', ()=> selectOption(parseInt(el.dataset.i)));
+    el.addEventListener('keydown', (e)=>{ if(e.key==='Enter') selectOption(parseInt(el.dataset.i)); });
+    if(state.answers[idx] === parseInt(el.dataset.i)) el.classList.add('selected');
+  });
+  // update progress bar
+  const pct = Math.round(((idx+1)/state.questions.length)*100);
+  qprogress.style.width = pct + '%';
+}
 
-      /* Option select */
-      function selectOption(optIndex) {
-        state.answers[state.current] = optIndex;
-        // mark nav button
-        const navBtn = document.getElementById("nav-" + state.current);
-        if (navBtn) navBtn.classList.add("answered");
-        // update UI selection
-        document
-          .querySelectorAll("#opts .opt")
-          .forEach((el) => el.classList.remove("selected"));
-        const chosen = document.querySelector(
-          `#opts .opt[data-i="${optIndex}"]`,
-        );
-        if (chosen) chosen.classList.add("selected");
-        updateScoreMeta();
-      }
+// Select option
+function selectOption(optIndex){
+  state.answers[state.current] = optIndex;
+  const navBtn = document.getElementById('nav-'+state.current);
+  if(navBtn) navBtn.classList.add('answered');
+  document.querySelectorAll('#opts .opt').forEach(el=>el.classList.remove('selected'));
+  const chosen = document.querySelector(`#opts .opt[data-i="${optIndex}"]`);
+  if(chosen) chosen.classList.add('selected');
+  updateScoreMeta();
+}
 
-      /* Navigation grid */
-      function renderNav() {
-        const grid = document.getElementById("navGrid");
-        grid.innerHTML = "";
-        for (let i = 0; i < state.questions.length; i++) {
-          const btn = document.createElement("button");
-          btn.className = "nav-btn";
-          btn.id = "nav-" + i;
-          btn.textContent = i + 1;
-          btn.addEventListener("click", () => {
-            state.current = i;
-            renderQuestion();
-          });
-          grid.appendChild(btn);
-        }
-      }
+// Render nav
+function renderNav(){
+  navGrid.innerHTML = '';
+  for(let i=0;i<state.questions.length;i++){
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn';
+    btn.id = 'nav-'+i;
+    btn.textContent = i+1;
+    btn.addEventListener('click', ()=>{ state.current = i; renderQuestion(); });
+    navGrid.appendChild(btn);
+  }
+}
 
-      /* Update answered count and progress */
-      function updateScoreMeta() {
-        const answered = state.answers.filter((x) => x !== null).length;
-        document.getElementById("scoreMeta").textContent =
-          `Answered ${answered} / ${state.questions.length}`;
-        const pct = Math.round((answered / state.questions.length) * 100);
-        document.getElementById("prog").style.width = pct + "%";
-      }
+// Update answered count
+function updateScoreMeta(){
+  const answered = state.answers.filter(x=>x!==null).length;
+  scoreMeta.textContent = `Answered ${answered} / ${state.questions.length}`;
+}
 
-      /* Prev/Next handlers */
-      document.getElementById("prevBtn").addEventListener("click", () => {
-        if (state.current > 0) {
-          state.current--;
-          renderQuestion();
-        }
-      });
-      document.getElementById("nextBtn").addEventListener("click", () => {
-        if (state.current < state.questions.length - 1) {
-          state.current++;
-          renderQuestion();
-        }
-      });
+// Timer
+function startTimer(){
+  clearInterval(timerInterval);
+  const end = Date.now() + state.durationSec*1000;
+  updateTimer();
+  timerInterval = setInterval(updateTimer, 1000);
+  function updateTimer(){
+    const now = Date.now();
+    let secLeft = Math.max(0, Math.round((end - now)/1000));
+    const mm = String(Math.floor(secLeft/60)).padStart(2,'0');
+    const ss = String(secLeft%60).padStart(2,'0');
+    timerEl.textContent = `${mm}:${ss}`;
+    if(secLeft<=0){
+      clearInterval(timerInterval);
+      alert('Time is up — the quiz will be submitted automatically.');
+      finishQuiz();
+    }
+  }
+}
 
-      /* Submit */
-      document.getElementById("submitBtn").addEventListener("click", () => {
-        if (confirm("Submit quiz now?")) finishQuiz();
-      });
+// Finish quiz
+function finishQuiz(){
+  clearInterval(timerInterval);
+  let correct=0;
+  const details = state.questions.map((item,i)=>{
+    const user = state.answers[i];
+    const isCorrect = user !== null && user === item.a;
+    if(isCorrect) correct++;
+    return { q: item.q, opts: item.opts, correctIndex: item.a, userIndex: user, isCorrect };
+  });
 
-      /* Timer */
-      let timerInterval = null;
-      function startTimer() {
-        clearInterval(timerInterval);
-        const end = state.startedAt + state.durationSec * 1000;
-        updateTimer();
-        timerInterval = setInterval(updateTimer, 1000);
-        function updateTimer() {
-          const now = Date.now();
-          let secLeft = Math.max(0, Math.round((end - now) / 1000));
-          const mm = String(Math.floor(secLeft / 60)).padStart(2, "0");
-          const ss = String(secLeft % 60).padStart(2, "0");
-          document.getElementById("timer").textContent = `${mm}:${ss}`;
-          // progress bar for time (rightmost)
-          const elapsed = state.durationSec - secLeft;
-          const timePct = Math.round((elapsed / state.durationSec) * 100);
-          // small visual: adjust prog width slightly by time too (not to confuse with answered progress)
-          // when time ends:
-          if (secLeft <= 0) {
-            clearInterval(timerInterval);
-            alert("Time is up — the quiz will be submitted automatically.");
-            finishQuiz();
-          }
-        }
-      }
-
-      /* Finish quiz: compute score and show answers */
-      function finishQuiz() {
-        clearInterval(timerInterval);
-        // compute
-        let correct = 0;
-        const details = state.questions.map((item, i) => {
-          const user = state.answers[i];
-          const isCorrect = user !== null && user === item.a;
-          if (isCorrect) correct++;
-          return {
-            q: item.q,
-            opts: item.opts,
-            correctIndex: item.a,
-            userIndex: user,
-            isCorrect,
-          };
-        });
-        // show result
-        const area = document.getElementById("resultArea");
-        area.style.display = "block";
-        area.innerHTML = `<div style="font-size:18px;font-weight:700">Score: ${correct} / ${state.questions.length}</div>
+  // show results
+  quizUI.style.display='none';
+  resultUI.style.display='';
+  resultArea.innerHTML = `<div style="font-size:18px;font-weight:700">Score: ${correct} / ${state.questions.length}</div>
     <div style="margin-top:10px;color:var(--muted)">Review below: correct answers are highlighted in green.</div>
     <div style="margin-top:12px;max-height:420px;overflow:auto;padding-right:8px">
-      ${details
-        .map(
-          (d, idx) => `
+      ${details.map((d,idx)=>`
         <div style="padding:10px;border-radius:8px;margin-bottom:8px;background:#fbfdff;border:1px solid #eef7ff">
-          <div style="font-weight:600">Q${idx + 1}. ${escapeHtml(d.q)}</div>
+          <div style="font-weight:600">Q${idx+1}. ${escapeHtml(d.q)}</div>
           <div style="margin-top:6px">
-            ${d.opts
-              .map(
-                (
-                  opt,
-                  i,
-                ) => `<div style="padding:6px;border-radius:6px;margin:4px 0;background:${i === d.correctIndex ? "#e6fff7" : i === d.userIndex && !d.isCorrect ? "#fff0f0" : "#fff"};border:1px solid ${i === d.correctIndex ? "#b6f0d8" : i === d.userIndex && !d.isCorrect ? "#f5c6cb" : "#eef7ff"}">
-              ${escapeHtml(opt)} ${i === d.correctIndex ? '<span style="color:green;font-weight:700"> (Correct)</span>' : ""} ${i === d.userIndex && !d.isCorrect ? '<span style="color:#d9534f;font-weight:700"> (Your answer)</span>' : ""}
-            </div>`,
-              )
-              .join("")}
+            ${d.opts.map((opt,i)=>`<div style="padding:6px;border-radius:6px;margin:4px 0;background:${i===d.correctIndex? '#e6fff7': i===d.userIndex && !d.isCorrect? '#fff0f0':'#fff'};border:1px solid ${i===d.correctIndex? '#b6f0d8': i===d.userIndex && !d.isCorrect? '#f5c6cb':'#eef7ff'}">
+              ${escapeHtml(opt)} ${i===d.correctIndex? '<span style="color:green;font-weight:700"> (Correct)</span>':''} ${i===d.userIndex && !d.isCorrect? '<span style="color:#d9534f;font-weight:700"> (Your answer)</span>':''}
+            </div>`).join('')}
           </div>
-        </div>`,
-        )
-        .join("")}
-    </div>
-    <div style="margin-top:12px"><button id="restartBtn">Restart Quiz</button></div>
-  `;
-        document.getElementById("restartBtn").addEventListener("click", () => {
-          initQuiz();
-          document.getElementById("resultArea").style.display = "none";
-        });
-        // scroll to result
-        area.scrollIntoView({ behavior: "smooth" });
-      }
+        </div>`).join('')}
+    </div>`;
 
-      /* Escape HTML helper */
-      function escapeHtml(s) {
-        return String(s).replace(
-          /[&<>"']/g,
-          (c) =>
-            ({
-              "&": "&amp;",
-              "<": "&lt;",
-              ">": "&gt;",
-              '"': "&quot;",
-              "'": "&#39;",
-            })[c],
-        );
-      }
+  // prepare downloadable CSV link (hidden)
+  const rows = [['Question Number','Question','Your Answer','Correct Answer','Is Correct']];
+  details.forEach((d,i)=>{
+    const your = d.userIndex===null? 'No answer' : d.opts[d.userIndex];
+    const corr = d.opts[d.correctIndex];
+    rows.push([String(i+1), d.q, your, corr, d.isCorrect ? 'Yes' : 'No']);
+  });
+  rows.push([]); rows.push(['Score', `${correct} / ${details.length}`]);
+  const csv = rows.map(r=>r.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  // create hidden anchor
+  let a = document.getElementById('lastResultsCSV');
+  if(a) a.remove();
+  a = document.createElement('a'); a.id='lastResultsCSV'; a.href=url; a.download='ent321-results.csv'; a.style.display='none';
+  document.body.appendChild(a);
+  // enable download button
+  downloadBtn.onclick = ()=> { a.click(); };
+  // handle redo availability
+  restartSameBtn.style.display = state.settings.allowRedo ? '' : 'none';
+}
 
-      /* On load */
-      window.addEventListener("load", () => {
-        initQuiz();
-      });
-    </script>
-  </body>
+// Escape helper
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+
+// Initialize theme and settings UI when questions loaded
+function initSettingsUI(){ /* placeholder overwritten earlier */ }
+
+// On load: ensure settings UI is initialized (fetch may have already called initSettingsUI)
+window.addEventListener('load', ()=>{
+  // if QUESTIONS already loaded and initSettingsUI not yet called, call it
+  if(QUESTIONS) initSettingsUI();
+});
+</script>
+</body>
 </html>
